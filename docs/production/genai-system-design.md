@@ -38,23 +38,26 @@ tags:
 
 ```mermaid
 flowchart LR
-    subgraph ING["Ingestion"]
+    subgraph ING["Ingestion (offline)"]
+        direction TB
         S["Connectors: wiki, drive,<br/>tickets, email archives"] --> P["Parse + OCR<br/>layout, tables"]
         P --> C["Structural chunking<br/>+ contextual headers"]
         C --> E["Embed + BM25"]
         E --> IDX[("Hybrid index<br/>with ACL metadata")]
     end
-    subgraph Q["Query path"]
-        U["User question + identity"] --> RW["Rewrite with chat history"]
+    subgraph Q["Retrieval (online)"]
+        direction TB
+        U["User question<br/>+ identity"] --> RW["Rewrite with<br/>chat history"]
         RW --> R["Hybrid retrieval<br/>filtered by ACLs"]
-        IDX --> R
-        R --> RR["Rerank top 50 → 8"]
-        RR --> G["LLM: answer with<br/>citations or abstain"]
-        G --> GR["Output checks:<br/>PII, groundedness"]
-        GR --> UI["Streamed answer + sources"]
+        R --> RR["Rerank<br/>top 50 → 8"]
     end
-    UI --> FB["Feedback + traces"]
-    FB --> EV["Eval set + dashboards"]
+    subgraph GEN["Generation and feedback"]
+        direction TB
+        G["LLM: answer with<br/>citations or abstain"] --> GR["Output checks:<br/>PII, groundedness"]
+        GR --> UI["Streamed answer<br/>+ sources"]
+        UI --> FB["Feedback + traces<br/>→ eval set, dashboards"]
+    end
+    ING --> Q --> GEN
 ```
 
 **Key decisions.**

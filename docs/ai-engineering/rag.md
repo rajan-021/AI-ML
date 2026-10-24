@@ -43,21 +43,21 @@ tags:
 ```mermaid
 flowchart LR
     subgraph IDX["Indexing (offline)"]
+        direction TB
         D["Documents"] --> PA["Parse<br/>PDF, HTML, tables"]
         PA --> CH["Chunk<br/>+ metadata"]
-        CH --> EM["Embed"]
+        CH --> EM["Embed →<br/>vector index"]
         CH --> BM["BM25 index"]
-        EM --> VS["Vector index"]
     end
     subgraph QRY["Query time"]
+        direction TB
         Q["User question"] --> QR["Rewrite / expand"]
         QR --> H["Hybrid retrieval<br/>+ permission filters"]
-        VS --> H
-        BM --> H
         H --> RR["Rerank top 50 → top 5"]
         RR --> P["Prompt: instructions +<br/>passages + question"]
         P --> G["LLM answer<br/>with citations"]
     end
+    IDX -->|"both indexes<br/>are searched"| QRY
 ```
 
 ### 1. Parsing

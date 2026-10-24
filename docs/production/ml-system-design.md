@@ -35,17 +35,17 @@ tags:
 ## Building blocks you'll reuse
 
 ```mermaid
-flowchart LR
-    REQ["Request:<br/>user + context"] --> FS["Feature store<br/>(online)"]
-    REQ --> CG["Candidate generation<br/>ANN over embeddings,<br/>heuristics, popular"]
+flowchart TB
+    REQ["Request: user + context"] --> CG["Candidate generation<br/>ANN over embeddings,<br/>heuristics, popular"]
+    REQ --> FS["Feature store<br/>(online)"]
     CG -->|"~1,000"| RK["Ranking model<br/>(GBDT or deep)"]
     FS --> RK
     RK -->|"~100"| RR["Re-ranking<br/>diversity, rules, policy"]
     RR --> OUT["Response"]
     OUT --> LOG["Logs: impressions,<br/>actions, features used"]
     LOG --> TR["Training pipeline<br/>(offline store, labels)"]
-    TR --> RK
-    TR --> CG
+    TR -.->|"retrain"| RK
+    TR -.->|"retrain"| CG
 ```
 
 | Block | Key points |

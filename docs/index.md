@@ -38,14 +38,14 @@ The fix is to learn AI/ML as **one story**. Every technique exists because an ea
 
 ## The storyline in four acts
 
-```mermaid
-flowchart LR
-    F["Foundations<br/>math, fundamentals, metrics"] --> A1["Act I · 1950s–2000s<br/>Learn from features"]
-    A1 -->|"hand-made features cap accuracy"| A2["Act II · 2006–2016<br/>Learn the features"]
-    A2 -->|"RNNs are slow and forget"| A3["Act III · 2017–2022<br/>Attention and scale"]
-    A3 -->|"LLMs only continue text"| A4["Act IV · 2022–now<br/>Align, ground, act"]
-    A4 --> P["Production<br/>MLOps and system design"]
-```
+<ol class="storyline">
+<li class="act-0"><span class="st-when">The toolkit</span><span class="st-name">Foundations</span><span class="st-text">Math, ML fundamentals and metrics that every later topic reuses.</span></li>
+<li class="act-1"><span class="st-when">1950s–2000s</span><span class="st-name">Act I · Learn from features</span><span class="st-text">People design the features; models learn weights on top of them.</span></li>
+<li class="act-2"><span class="st-when">2006–2016</span><span class="st-name">Act II · Learn the features</span><span class="st-text"><em>Because</em> hand-made features capped accuracy.</span></li>
+<li class="act-3"><span class="st-when">2017–2022</span><span class="st-name">Act III · Attention and scale</span><span class="st-text"><em>Because</em> RNNs were slow and forgot.</span></li>
+<li class="act-4"><span class="st-when">2022–now</span><span class="st-name">Act IV · Align, ground, act</span><span class="st-text"><em>Because</em> LLMs only continue text.</span></li>
+<li class="act-0"><span class="st-when">Throughout</span><span class="st-name">Production</span><span class="st-text">MLOps and system design: making any of it work for real users.</span></li>
+</ol>
 
 ## Sections
 

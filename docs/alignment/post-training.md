@@ -32,12 +32,12 @@ tags:
 ## The post-training pipeline
 
 ```mermaid
-flowchart LR
+flowchart TB
     B["Base model"] --> S["SFT<br/>instruction–response pairs"]
     S --> P["Preference data<br/>prompt, chosen, rejected"]
     P --> RM["Reward model<br/>(Bradley–Terry)"]
     RM --> PPO["RL: PPO with KL penalty<br/>to the SFT reference"]
-    P -.->|"alternative: no reward model"| DPO["DPO / IPO / KTO"]
+    P -.->|"alternative:<br/>no reward model"| DPO["DPO / IPO / KTO"]
     PPO --> A["Assistant"]
     DPO --> A
     A --> V["RL with verifiable rewards<br/>(math, code)"]

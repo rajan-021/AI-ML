@@ -24,18 +24,16 @@ Prompt engineering focuses on writing good instructions for a single call. Agent
 flowchart TB
     subgraph W["What competes for one context window"]
         direction TB
-        SP["System prompt and rules"]
-        TD["Tool definitions"]
-        EX["Examples"]
-        MEM["Memory: user and project facts"]
-        RET["Retrieved documents"]
-        HIS["Conversation and action history"]
-        TR["Tool results"]
-        CUR["The current request"]
+        SP["System prompt and rules"] ~~~ TD["Tool definitions"]
+        TD ~~~ EX["Examples"]
+        EX ~~~ MEM["Memory: user and project facts"]
+        RET["Retrieved documents"] ~~~ HIS["Conversation and action history"]
+        HIS ~~~ TR["Tool results"]
+        TR ~~~ CUR["The current request"]
     end
     W --> M["Model call"]
     M --> OUT["Next action or answer"]
-    OUT -->|"results append, history grows"| HIS
+    OUT -->|"results append, history grows"| W
 ```
 
 ## Why context is scarce

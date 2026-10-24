@@ -71,11 +71,11 @@ $$
 ## The multi-stage architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
     A["Millions of items"] --> B["Candidate generation<br/>two-tower + ANN, co-visitation,<br/>popular, fresh"]
     B -->|"~1,000"| C["Filtering<br/>seen, blocked, unavailable"]
-    C --> D["Ranking<br/>GBDT or deep model,<br/>rich features"]
-    D -->|"~100"| E["Re-ranking<br/>diversity, freshness,<br/>business rules"]
+    C --> D["Ranking<br/>GBDT or deep model, rich features"]
+    D -->|"~100"| E["Re-ranking<br/>diversity, freshness, business rules"]
     E -->|"~10–50"| F["Shown to the user"]
     F -.->|"logged interactions"| G["Training data"]
     G -.-> B

@@ -26,13 +26,13 @@ sequenceDiagram
     participant S as Server
     participant G as GPU
     C->>S: prompt (n tokens)
-    S->>G: prefill: all n tokens in parallel, fill KV cache
+    S->>G: prefill: all n tokens at once,<br/>fill the KV cache
     G-->>S: logits for token n+1
     S-->>C: first token (TTFT)
-    loop until stop token or max length
-        S->>G: decode: 1 new token attends to the KV cache
+    loop until a stop token or max length
+        S->>G: decode: 1 new token<br/>reads the KV cache
         G-->>S: logits for the next token
-        S-->>C: stream token (inter-token latency)
+        S-->>C: stream token<br/>(time per token)
     end
 ```
 

@@ -143,9 +143,9 @@ $$
 **Core idea (Stable Diffusion):** compress images with a VAE (8× downsampling per side), run diffusion in that latent space, and decode at the end.
 
 ```mermaid
-flowchart LR
+flowchart TB
     P["Text prompt"] --> TE["Text encoder<br/>(CLIP / T5)"]
-    N["Random latent noise"] --> D["Denoiser<br/>(U-Net or DiT)<br/>× N steps"]
+    N["Random latent noise"] --> D["Denoiser (U-Net or DiT)<br/>× N steps"]
     TE -->|"cross-attention"| D
     D --> L["Clean latent"]
     L --> VD["VAE decoder"]

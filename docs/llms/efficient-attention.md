@@ -112,7 +112,7 @@ GQA can also be created from an existing MHA checkpoint by mean-pooling key and 
 **Core idea:** replace each FFN with $E$ expert FFNs and a **router** that sends each token to its top-$k$ experts (often $k = 1$ or 2). Total parameters grow with $E$; compute per token grows only with $k$.
 
 ```mermaid
-flowchart LR
+flowchart TB
     T["token hidden state"] --> R["router: softmax(W·h)"]
     R -->|"top-2"| E1["expert 3"]
     R -->|"top-2"| E2["expert 7"]

@@ -154,9 +154,9 @@ e_{t,i} = \text{score}(s_{t-1}, h_i),\qquad \alpha_{t,i} = \frac{\exp(e_{t,i})}{
 $$
 
 ```mermaid
-flowchart LR
-    subgraph Encoder
-        h1["h₁: The"] 
+flowchart TB
+    subgraph Encoder["Encoder states"]
+        h1["h₁: The"]
         h2["h₂: cat"]
         h3["h₃: sat"]
     end

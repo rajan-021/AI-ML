@@ -26,15 +26,15 @@ MCP defines one protocol, like a USB-C port for AI: a system exposes its capabil
 
 ```mermaid
 flowchart LR
-    subgraph H["Host: an AI application (chat app, IDE, agent)"]
+    subgraph H["Host: chat app, IDE or agent"]
         LLM["Model"]
         C1["MCP client 1"]
         C2["MCP client 2"]
         C3["MCP client 3"]
     end
     C1 <-->|"stdio"| S1["Local server<br/>file system"]
-    C2 <-->|"Streamable HTTP + OAuth"| S2["Remote server<br/>issue tracker"]
-    C3 <-->|"Streamable HTTP + OAuth"| S3["Remote server<br/>company database"]
+    C2 <-->|"Streamable HTTP<br/>+ OAuth"| S2["Remote server<br/>issue tracker"]
+    C3 <-->|"Streamable HTTP<br/>+ OAuth"| S3["Remote server<br/>company database"]
     S2 --> API["Tracker API"]
     S3 --> DB[("Database")]
 ```

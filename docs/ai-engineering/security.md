@@ -20,7 +20,7 @@ tags:
 ## The threat model
 
 ```mermaid
-flowchart LR
+flowchart TB
     U["User input"] --> APP
     DOC["Documents, web pages,<br/>emails, tool results"] --> APP
     subgraph APP["LLM application"]
@@ -30,7 +30,7 @@ flowchart LR
     end
     OG --> UI["Shown to users<br/>(browser, chat)"]
     TP --> T["Tools: databases, email,<br/>code execution, payments"]
-    T --> DOC
+    T -.->|"results come back<br/>as untrusted content"| DOC
 ```
 
 Three questions frame every review: **what untrusted content can reach the model**, **what can the model cause to happen**, and **what sensitive data can it see**.

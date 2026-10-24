@@ -95,14 +95,14 @@ Effective judge prompts check one criterion at a time ("Is every claim supported
 ## Eval-driven development
 
 ```mermaid
-flowchart LR
-    A["Observe failures<br/>(traces, feedback, reviews)"] --> B["Add cases to<br/>the eval set"]
+flowchart TB
+    A["Observe failures<br/>(traces, feedback, reviews)"] --> B["Add cases to the eval set"]
     B --> C["Change prompt, retrieval,<br/>tools, model or harness"]
-    C --> D["Run the eval suite<br/>in CI"]
+    C --> D["Run the eval suite in CI"]
     D -->|"regressions"| C
-    D -->|"better"| E["Ship behind an<br/>A/B test or gradual rollout"]
+    D -->|"better"| E["Ship behind an A/B test<br/>or a gradual rollout"]
     E --> F["Monitor online metrics<br/>and sampled judge scores"]
-    F --> A
+    F -->|"new failures"| A
 ```
 
 ## Online evaluation

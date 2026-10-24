@@ -21,14 +21,19 @@ tags:
 
 ```mermaid
 flowchart LR
-    A["Frame the problem<br/>business → ML metric"] --> B["Data<br/>collect, label, validate"]
-    B --> C["Features"]
-    C --> D["Train and tune"]
-    D --> E["Evaluate offline"]
-    E --> F["Register and package"]
-    F --> G["Deploy<br/>shadow → canary → full"]
-    G --> H["Monitor<br/>data, predictions, outcomes, system"]
-    H -->|"drift, decay, new data"| B
+    subgraph BUILD["Build"]
+        direction TB
+        A["Frame the problem<br/>business → ML metric"] --> B["Data<br/>collect, label, validate"]
+        B --> C["Features"]
+        C --> D["Train and tune"]
+    end
+    subgraph RUN["Ship and operate"]
+        direction TB
+        E["Evaluate offline"] --> F["Register and package"]
+        F --> G["Deploy<br/>shadow → canary → full"]
+        G --> H["Monitor data, predictions,<br/>outcomes; retrain on drift"]
+    end
+    BUILD --> RUN
 ```
 
 - **Framing:** map the business goal to an ML metric and decide whether ML is needed at all; a rules-based baseline is often the right first release.

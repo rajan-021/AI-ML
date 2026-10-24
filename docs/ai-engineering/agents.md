@@ -51,7 +51,7 @@ tags:
 ## The agent loop
 
 ```mermaid
-flowchart LR
+flowchart TB
     G["Goal + context"] --> R["Model reasons<br/>about the next step"]
     R --> D{"Done?"}
     D -->|"no"| A["Call a tool"]

@@ -27,28 +27,30 @@ tags:
 | <span class="act act-0">Production</span> | throughout | Ship, monitor and design whole systems responsibly | MLOps, feature stores, drift monitoring, ML and GenAI system design, fairness | — |
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph I["Act I · features designed by people"]
+        direction LR
         A["Linear models"] --> B["SVM + kernels"]
         A --> C["Trees"] --> D["Random forest / boosting"]
     end
     subgraph II["Act II · features learned"]
+        direction LR
         E["MLP + backprop"] --> F["CNN → ResNet"]
         E --> G["RNN → LSTM"] --> H["Seq2seq + attention"]
     end
     subgraph III["Act III · attention and scale"]
+        direction LR
         J["Transformer"] --> K["BERT / GPT"] --> L["LLMs at scale"]
+        J --> Q["ViT, CLIP"]
     end
     subgraph IV["Act IV · align, ground, act"]
+        direction LR
         M["SFT → RLHF → DPO"] --> N["Reasoning models"]
         O["RAG"] --> P["Tools → agents → MCP"]
     end
-    B -.-> E
-    H --> J
-    F --> Q["ViT, CLIP"]
-    J --> Q
-    L --> M
-    L --> O
+    I -->|"hand-made features cap accuracy"| II
+    II -->|"RNNs are slow and forget"| III
+    III -->|"LLMs only continue text"| IV
 ```
 
 ## Timeline of the milestones interviewers mention
@@ -275,25 +277,26 @@ The same few ideas reappear across decades. Making these connections out loud is
 AI engineer and agentic AI interviews often open with *"explain how an LLM application works end to end."* This is the picture to draw.
 
 ```mermaid
-flowchart TB
-    D["Data: web, code, books, synthetic"] --> T["Tokenizer (BPE)"]
-    T --> PT["Pretraining<br/>next-token prediction"]
-    PT --> BASE["Base model"]
-    BASE --> SFT["SFT on instructions"]
-    SFT --> PREF["Preference tuning<br/>RLHF / DPO / RLAIF"]
-    PREF --> RL["RL with verifiable rewards<br/>(reasoning)"]
-    RL --> M["Assistant model"]
-    M --> OPT["Quantize, distill, LoRA adapters"]
-    OPT --> SERVE["Serving: KV cache, batching,<br/>speculative decoding"]
-    SERVE --> APP["Application layer"]
-    subgraph APPL["Application layer"]
-        PR["Prompts and context"] --> RAGN["Retrieval (RAG)"]
-        PR --> TOOLS["Tools via function calling / MCP"]
-        TOOLS --> AG["Agent loop inside a harness"]
+flowchart LR
+    subgraph PRE["1 · Pretrain"]
+        direction TB
+        D["Data: web, code,<br/>books, synthetic"] --> T["Tokenizer (BPE)"]
+        T --> PT["Next-token<br/>prediction"]
+        PT --> BASE["Base model"]
     end
-    APP --> APPL
-    APPL --> EV["Evals, guardrails, monitoring"]
-    EV -.->|"failures become training data and prompt fixes"| SFT
+    subgraph POST["2 · Post-train"]
+        direction TB
+        SFT["SFT on instructions"] --> PREF["Preference tuning<br/>(RLHF, DPO)"]
+        PREF --> RL["RL with verifiable<br/>rewards"]
+        RL --> M["Assistant model"]
+    end
+    subgraph APP["3 · Serve and build"]
+        direction TB
+        OPT["Quantize, distill,<br/>LoRA adapters"] --> SERVE["Serving: KV cache,<br/>batching"]
+        SERVE --> APPL["Apps: RAG, tools,<br/>MCP, agents"]
+        APPL --> EV["Evals, guardrails,<br/>monitoring"]
+    end
+    PRE --> POST --> APP
 ```
 
 | Stage | What happens | Where to study it |

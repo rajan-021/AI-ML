@@ -31,13 +31,13 @@ sequenceDiagram
     participant M as Model
     participant T as Tool / API
     U->>A: "Where is my order 4417?"
-    A->>M: messages + tool definitions
-    M-->>A: tool call: get_order_status({"order_id": "4417"})
-    A->>A: validate arguments, check permissions
+    A->>M: messages + tools
+    M-->>A: get_order_status("4417")
+    A->>A: validate arguments,<br/>check permissions
     A->>T: call the real API
-    T-->>A: {"status": "shipped", "eta": "2026-10-27"}
-    A->>M: tool result (matched by call id)
-    M-->>A: "Your order shipped and should arrive on 27 October."
+    T-->>A: {"status": "shipped"}
+    A->>M: tool result + call id
+    M-->>A: "Your order has shipped."
     A-->>U: answer
 ```
 

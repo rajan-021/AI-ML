@@ -84,13 +84,19 @@ The most common asks are on the [ML Coding](../practice/ml-coding.md) page: line
 
 ```mermaid
 flowchart LR
-    A["1 · Clarify<br/>goal, users, scale, latency"] --> B["2 · Frame as ML<br/>input, output, metric"]
-    B --> C["3 · Data<br/>sources, labels, leakage"]
-    C --> D["4 · Features"]
-    D --> E["5 · Model<br/>baseline → better"]
-    E --> F["6 · Training<br/>loss, sampling, splits"]
-    F --> G["7 · Evaluation<br/>offline → online A/B"]
-    G --> H["8 · Serving & monitoring"]
+    subgraph P1["Frame the problem"]
+        direction TB
+        A["1 · Clarify<br/>goal, users, scale, latency"] --> B["2 · Frame as ML<br/>input, output, metric"]
+        B --> C["3 · Data<br/>sources, labels, leakage"]
+        C --> D["4 · Features"]
+    end
+    subgraph P2["Build and ship"]
+        direction TB
+        E["5 · Model<br/>baseline → better"] --> F["6 · Training<br/>loss, sampling, splits"]
+        F --> G["7 · Evaluation<br/>offline → online A/B"]
+        G --> H["8 · Serving<br/>and monitoring"]
+    end
+    P1 --> P2
 ```
 
 Time budget for a 45-minute round: about 5 minutes clarifying, 5 framing, 10 on data and features, 10 on modeling and training, 5 on evaluation, 10 on serving, monitoring and trade-offs. For GenAI designs, replace steps 4–6 with prompt, retrieval, tools and model choice, and spend more time on evaluation, guardrails, cost and latency. Full worked designs are on [ML System Design](../production/ml-system-design.md) and [GenAI System Design](../production/genai-system-design.md).

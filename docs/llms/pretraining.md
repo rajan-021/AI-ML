@@ -88,12 +88,18 @@ Data decides much of a model's quality. A typical pipeline:
 
 ```mermaid
 flowchart LR
-    A["Web crawl, code,<br/>books, papers, math"] --> B["Language ID and<br/>heuristic filters"]
-    B --> C["Quality filtering<br/>(classifiers, perplexity)"]
-    C --> D["Deduplication<br/>exact + near-duplicate"]
-    D --> E["Safety and PII<br/>filtering"]
-    E --> F["Mixture weighting<br/>by source"]
-    F --> G["Tokenization"]
+    subgraph COLLECT["Collect and filter"]
+        direction TB
+        A["Web crawl, code,<br/>books, papers, math"] --> B["Language ID and<br/>heuristic filters"]
+        B --> C["Quality filtering<br/>(classifiers, perplexity)"]
+        C --> D["Deduplication<br/>exact + near-duplicate"]
+    end
+    subgraph PREP["Clean, mix, tokenize"]
+        direction TB
+        E["Safety and PII<br/>filtering"] --> F["Mixture weighting<br/>by source"]
+        F --> G["Tokenization"]
+    end
+    COLLECT --> PREP
 ```
 
 - **Filtering:** remove boilerplate, spam and very short or symbol-heavy pages; keep text a quality classifier judges reference-like.
