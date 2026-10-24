@@ -1,0 +1,3357 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="From the perceptron to multi-layer networks, loss functions, backpropagation with shapes, activation functions, vanishing gradients and weight initialization.">
+      
+      
+        <meta name="author" content="rajan-021">
+      
+      
+        <link rel="canonical" href="https://rajan-021.github.io/AI-ML/deep-learning/neural-networks/">
+      
+      
+        <link rel="prev" href="../../classical-ml/recommender-systems/">
+      
+      
+        <link rel="next" href="../training/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Neural Network Fundamentals - AI/ML Interview Map</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%203C6.5%203%202%206.6%202%2011c0%202.2%201.1%204.2%202.8%205.5%200%20.6-.4%202.2-2.8%204.5%202.4-.1%204.6-1%206.5-2.5%201.1.3%202.3.5%203.5.5%205.5%200%2010-3.6%2010-8s-4.5-8-10-8m0%2014c-4.4%200-8-2.7-8-6s3.6-6%208-6%208%202.7%208%206-3.6%206-8%206m.2-10.5c-.9%200-1.6.2-2.1.5-.6.4-.9%201-.8%201.7h2q0-.45.3-.6c.2-.1.4-.2.7-.2s.6.1.8.3.3.4.3.7-.1.5-.2.7c-.2.2-.4.4-.6.5-.5.3-.9.6-1.1.8-.4.3-.5.6-.5%201.1h2c0-.3.1-.5.1-.7.1-.2.3-.3.5-.5.5-.2.8-.5%201.1-.9s.4-.8.4-1.2c0-.7-.3-1.3-.8-1.7-.4-.3-1.2-.5-2.1-.5M11%2013v2h2v-2z%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#neural-network-fundamentals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  New here? Read <a href="../../start/how-to-use/">How to Use This Site</a> first, then test yourself with the <a href="../../practice/flashcards/">Flashcard Drill</a>.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI/ML Interview Map" class="md-header__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI/ML Interview Map
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Neural Network Fundamentals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/math/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../classical-ml/linear-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Classical ML
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../llms/transformer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Transformers & LLMs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../alignment/rl-essentials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Alignment & Reasoning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-engineering/prompting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../production/mlops/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Production
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../practice/ml-coding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Practice
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI/ML Interview Map" class="md-nav__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    AI/ML Interview Map
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use This Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/big-picture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Big Picture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/study-plans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Study Plans by Week and Role
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/interview-playbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math for ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/ml-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation & Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classical ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classical ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/linear-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear & Logistic Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/knn-nb-svm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    kNN, Naive Bayes & SVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/trees-ensembles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees & Ensembles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/unsupervised/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/recommender-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recommender Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Network Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Network Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#from-perceptron-to-multi-layer-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From perceptron to multi-layer network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From perceptron to multi-layer network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shapes-and-parameter-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shapes and parameter counts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loss-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loss functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backpropagation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backpropagation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-two-layer-network-with-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A two-layer network with shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-differentiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic differentiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activation functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanishing-and-exploding-gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vanishing and exploding gradients
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weight-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weight initialization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-came-next-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What came next, and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Deep Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNNs & Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sequence-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence Models (RNN to Attention)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformers & LLMs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformers & LLMs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/efficient-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Efficient Attention & MoE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/pretraining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pretraining & LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/fine-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning & Efficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference & Serving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/generative-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alignment & Reasoning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alignment & Reasoning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/rl-essentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RL Essentials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/post-training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Training & Alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/reasoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reasoning Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prompt Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embeddings & Vector Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP & A2A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/context-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/harness-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating LLM Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails & Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Production
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLOps & LLMOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/ml-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/genai-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/responsible-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responsible AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/ml-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Coding from Scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/top-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Most-Asked Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/flashcards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flashcard Drill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#from-perceptron-to-multi-layer-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From perceptron to multi-layer network
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="From perceptron to multi-layer network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shapes-and-parameter-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shapes and parameter counts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loss-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loss functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backpropagation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backpropagation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-two-layer-network-with-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A two-layer network with shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-differentiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic differentiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activation functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanishing-and-exploding-gradients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vanishing and exploding gradients
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weight-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weight initialization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-came-next-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What came next, and why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ai-engineer" class="md-tag">AI Engineer</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:applied-scientist" class="md-tag">Applied Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ml-engineer" class="md-tag">ML Engineer</a>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/rajan-021/AI-ML/edit/main/docs/deep-learning/neural-networks.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="neural-network-fundamentals">Neural Network Fundamentals<a class="headerlink" href="#neural-network-fundamentals" title="Permanent link">&para;</a></h1><div class="study-bar" data-page="deep-learning/neural-networks/" data-minutes="14" data-questions="15" data-act="2" data-priority="Critical"></div>
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<p>A neural network stacks linear layers with non-linear <strong>activations</strong>, so hidden layers learn their own features. <strong>Backpropagation</strong> is the chain rule applied backward through the computation graph, giving every parameter's gradient in about the cost of two forward passes. Deep networks were hard to train because gradients <strong>vanish or explode</strong> through many layers; <abbr title="Rectified Linear Unit">ReLU</abbr>-family activations, careful <strong>initialization</strong>, normalization and residual connections fixed that.</p>
+</div>
+<div class="admonition evolution">
+<p class="admonition-title">Where this fits</p>
+<p><strong>Before:</strong> <a href="../../classical-ml/linear-models/">logistic regression</a> is a one-layer network; <a href="../../classical-ml/knn-nb-svm/">SVMs</a> need a hand-picked kernel. <strong>This page:</strong> learning features with layers. <strong>Next:</strong> <a href="../training/">Training Deep Networks</a> covers optimizers, normalization and regularization.</p>
+</div>
+<h2 id="from-perceptron-to-multi-layer-network">From perceptron to multi-layer network<a class="headerlink" href="#from-perceptron-to-multi-layer-network" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> linear models can't learn XOR or any interaction unless someone engineers the feature.</p>
+<div class="metro act-2">
+<ul>
+<li><strong>McCulloch–Pitts neuron</strong> <span class="yr">1943</span><br>A threshold unit as a model of a neuron. No learning rule.</li>
+<li><strong>Perceptron (Rosenblatt)</strong> <span class="yr">1958</span><br>Learns weights with an error-driven rule. Only linear boundaries.</li>
+<li><strong>Perceptrons (Minsky &amp; Papert)</strong> <span class="yr">1969</span><br>Showed single layers can't learn XOR; funding and interest collapsed.</li>
+<li><strong>Backpropagation popularized</strong> <span class="yr">1986</span><br>Multi-layer networks become trainable.</li>
+<li><strong>Deep learning revival</strong> <span class="yr">2006–2012</span><br>Layer-wise pretraining, GPUs, <abbr title="Rectified Linear Unit">ReLU</abbr>, big data, then AlexNet.</li>
+</ul>
+</div>
+<p><strong>Core idea:</strong> stack layers. Each layer computes <span class="arithmatex">\(h = \phi(Wx + b)\)</span>, a linear map followed by a non-linearity <span class="arithmatex">\(\phi\)</span>. Hidden layers transform the input into features that make the final (linear) layer's job easy.</p>
+<p>Why the non-linearity is essential: without it, <span class="arithmatex">\(W_2(W_1x) = (W_2W_1)x\)</span> collapses into a single linear layer, however many layers you stack.</p>
+<p><strong>Universal approximation theorem</strong> (Cybenko 1989; Hornik 1991): a network with one hidden layer and enough units can approximate any continuous function on a bounded domain to any accuracy. It says nothing about how many units you need, whether gradient descent can find the weights, or how well it generalizes. In practice <strong>depth</strong> is far more parameter-efficient than width: deep networks compose simple features into complex ones (edges → textures → parts → objects).</p>
+<h3 id="shapes-and-parameter-counts">Shapes and parameter counts<a class="headerlink" href="#shapes-and-parameter-counts" title="Permanent link">&para;</a></h3>
+<p>For a batch <span class="arithmatex">\(X\)</span> of shape <span class="arithmatex">\((n, d_{in})\)</span>, a dense layer with weights <span class="arithmatex">\(W\)</span> of shape <span class="arithmatex">\((d_{in}, d_{out})\)</span> and bias <span class="arithmatex">\((d_{out},)\)</span> produces <span class="arithmatex">\((n, d_{out})\)</span> and has <span class="arithmatex">\(d_{in}d_{out} + d_{out}\)</span> parameters. An <abbr title="Multi-Layer Perceptron">MLP</abbr> <span class="arithmatex">\(784 \to 256 \to 10\)</span> has <span class="arithmatex">\(784\cdot256 + 256 + 256\cdot10 + 10 = 203{,}530\)</span> parameters.</p>
+<h2 id="loss-functions">Loss functions<a class="headerlink" href="#loss-functions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Output layer</th>
+<th>Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regression</td>
+<td>Linear</td>
+<td><abbr title="Mean Squared Error">MSE</abbr> (or <abbr title="Mean Absolute Error">MAE</abbr>, Huber)</td>
+</tr>
+<tr>
+<td>Binary classification</td>
+<td>One logit, sigmoid</td>
+<td>Binary cross-entropy</td>
+</tr>
+<tr>
+<td>Multiclass (one label)</td>
+<td><span class="arithmatex">\(K\)</span> logits, softmax</td>
+<td>Categorical cross-entropy</td>
+</tr>
+<tr>
+<td>Multi-label</td>
+<td><span class="arithmatex">\(K\)</span> logits, independent sigmoids</td>
+<td>Sum of binary cross-entropies</td>
+</tr>
+<tr>
+<td>Ranking / retrieval</td>
+<td>Similarity scores</td>
+<td>Contrastive (InfoNCE), triplet, pairwise ranking</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Numerical stability</p>
+<p>Compute losses from <strong>logits</strong>, not probabilities: frameworks fuse sigmoid with BCE (<code>BCEWithLogitsLoss</code>) and softmax with cross-entropy using the <strong>log-sum-exp trick</strong>, <span class="arithmatex">\(\log\sum_j e^{z_j} = m + \log\sum_j e^{z_j - m}\)</span> with <span class="arithmatex">\(m = \max_j z_j\)</span>. This avoids overflow in <span class="arithmatex">\(e^{z}\)</span> and <span class="arithmatex">\(\log 0\)</span>.</p>
+</div>
+<h2 id="backpropagation">Backpropagation<a class="headerlink" href="#backpropagation" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> a network has millions of parameters; computing each gradient separately (for example by finite differences) would need millions of forward passes.</p>
+<p><strong>Core idea:</strong> the chain rule, applied backward from the loss through the computation graph, reusing every intermediate result. One backward pass gives the gradient for all parameters at roughly two to three times the cost of a forward pass.</p>
+<h3 id="a-two-layer-network-with-shapes">A two-layer network with shapes<a class="headerlink" href="#a-two-layer-network-with-shapes" title="Permanent link">&para;</a></h3>
+<p>Forward pass for input <span class="arithmatex">\(X\)</span> <span class="arithmatex">\((n, d)\)</span>, hidden size <span class="arithmatex">\(h\)</span>, <span class="arithmatex">\(k\)</span> classes, one-hot labels <span class="arithmatex">\(Y\)</span> <span class="arithmatex">\((n, k)\)</span>:</p>
+<div class="arithmatex">\[
+Z_1 = XW_1 + b_1,\quad A_1 = \text{ReLU}(Z_1),\quad Z_2 = A_1W_2 + b_2,\quad P = \text{softmax}(Z_2),\quad L = -\tfrac{1}{n}\textstyle\sum Y \odot \log P
+\]</div>
+<p>Backward pass (each gradient has the shape of the thing it's the gradient of):</p>
+<table>
+<thead>
+<tr>
+<th>Gradient</th>
+<th>Formula</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial Z_2\)</span></td>
+<td><span class="arithmatex">\((P - Y)/n\)</span></td>
+<td><span class="arithmatex">\((n, k)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial W_2\)</span></td>
+<td><span class="arithmatex">\(A_1^\top\, \partial Z_2\)</span></td>
+<td><span class="arithmatex">\((h, k)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial b_2\)</span></td>
+<td>sum of <span class="arithmatex">\(\partial Z_2\)</span> over rows</td>
+<td><span class="arithmatex">\((k,)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial A_1\)</span></td>
+<td><span class="arithmatex">\(\partial Z_2\, W_2^\top\)</span></td>
+<td><span class="arithmatex">\((n, h)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial Z_1\)</span></td>
+<td><span class="arithmatex">\(\partial A_1 \odot \mathbb{1}[Z_1 &gt; 0]\)</span></td>
+<td><span class="arithmatex">\((n, h)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial W_1\)</span></td>
+<td><span class="arithmatex">\(X^\top\, \partial Z_1\)</span></td>
+<td><span class="arithmatex">\((d, h)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\partial L / \partial b_1\)</span></td>
+<td>sum of <span class="arithmatex">\(\partial Z_1\)</span> over rows</td>
+<td><span class="arithmatex">\((h,)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The pattern to remember: for <span class="arithmatex">\(Z = AW\)</span>, the weight gradient is <span class="arithmatex">\(A^\top \partial Z\)</span> and the gradient passed back is <span class="arithmatex">\(\partial Z\, W^\top\)</span>.</p>
+<h3 id="automatic-differentiation">Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reverse mode</strong> (backprop) computes the gradient of one scalar output with respect to all inputs in one backward pass. Ideal for training, where the loss is a scalar and parameters number in the billions.</li>
+<li><strong>Forward mode</strong> propagates derivatives alongside values, one input direction per pass. Efficient when there are few inputs and many outputs.</li>
+<li>PyTorch builds the graph dynamically as code runs ("define by run") and frees it after <code>backward()</code>.</li>
+<li><strong>Memory:</strong> the backward pass needs the activations saved during the forward pass, so activation memory grows with batch size, sequence length and depth. <strong>Gradient checkpointing</strong> stores only some activations and recomputes the rest during backward, trading about 30% more compute for much less memory.</li>
+<li><strong>Gradient checking:</strong> compare analytic gradients with finite differences <span class="arithmatex">\(\frac{f(\theta + \epsilon) - f(\theta - \epsilon)}{2\epsilon}\)</span> on a tiny network to catch bugs.</li>
+</ul>
+<h2 id="activation-functions">Activation functions<a class="headerlink" href="#activation-functions" title="Permanent link">&para;</a></h2>
+<p><img alt="Sigmoid, tanh, ReLU and GELU with their derivatives" loading="lazy" src="../../assets/img/activations.svg#only-light" />
+<img alt="Sigmoid, tanh, ReLU and GELU with their derivatives" loading="lazy" src="../../assets/img/activations-dark.svg#only-dark" /></p>
+<table>
+<thead>
+<tr>
+<th>Activation</th>
+<th>Formula</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Where used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td><span class="arithmatex">\(\frac{1}{1+e^{-x}}\)</span></td>
+<td>Output in (0, 1)</td>
+<td>Saturates; derivative ≤ 0.25; not zero-centered</td>
+<td>Binary outputs, gates</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td><span class="arithmatex">\(\tanh x\)</span></td>
+<td>Zero-centered, range (−1, 1)</td>
+<td>Saturates</td>
+<td><abbr title="Recurrent Neural Network">RNN</abbr> and <abbr title="Long Short-Term Memory">LSTM</abbr> states</td>
+</tr>
+<tr>
+<td><strong><abbr title="Rectified Linear Unit">ReLU</abbr></strong></td>
+<td><span class="arithmatex">\(\max(0, x)\)</span></td>
+<td>No saturation for <span class="arithmatex">\(x &gt; 0\)</span>; cheap; sparse</td>
+<td>"Dying <abbr title="Rectified Linear Unit">ReLU</abbr>": units stuck at 0</td>
+<td>CNNs, MLPs</td>
+</tr>
+<tr>
+<td><strong>Leaky <abbr title="Rectified Linear Unit">ReLU</abbr></strong></td>
+<td><span class="arithmatex">\(\max(\alpha x, x)\)</span>, <span class="arithmatex">\(\alpha \approx 0.01\)</span></td>
+<td>Keeps a gradient for <span class="arithmatex">\(x &lt; 0\)</span></td>
+<td>Extra hyperparameter</td>
+<td>Fixes dying units</td>
+</tr>
+<tr>
+<td><strong>ELU / SELU</strong></td>
+<td>Smooth exponential for <span class="arithmatex">\(x &lt; 0\)</span></td>
+<td>Smooth, mean near zero</td>
+<td>Costlier</td>
+<td>Some MLPs</td>
+</tr>
+<tr>
+<td><strong><abbr title="Gaussian Error Linear Unit">GELU</abbr></strong></td>
+<td><span class="arithmatex">\(x\,\Phi(x)\)</span></td>
+<td>Smooth, probabilistic gating</td>
+<td>Slightly costlier</td>
+<td>BERT, GPT</td>
+</tr>
+<tr>
+<td><strong>Swish / SiLU</strong></td>
+<td><span class="arithmatex">\(x\,\sigma(x)\)</span></td>
+<td>Smooth, non-monotonic</td>
+<td>Slightly costlier</td>
+<td>EfficientNet, inside SwiGLU</td>
+</tr>
+<tr>
+<td><strong>SwiGLU</strong></td>
+<td><span class="arithmatex">\((xW) \otimes \text{SiLU}(xV)\)</span></td>
+<td>Gated feed-forward layers train better</td>
+<td>A third weight matrix</td>
+<td>LLaMA-style LLMs</td>
+</tr>
+<tr>
+<td><strong>Softmax</strong></td>
+<td><span class="arithmatex">\(\frac{e^{z_k}}{\sum_j e^{z_j}}\)</span></td>
+<td>Probabilities over classes</td>
+<td>Not used between hidden layers</td>
+<td>Classification heads, attention</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vanishing-and-exploding-gradients">Vanishing and exploding gradients<a class="headerlink" href="#vanishing-and-exploding-gradients" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> deep networks and RNNs stopped learning in their early layers.</p>
+<p><strong>Why:</strong> backprop multiplies one factor per layer (weights times activation derivatives). If those factors are mostly below 1, the gradient shrinks exponentially with depth; above 1, it explodes. Sigmoid's derivative is at most 0.25, so ten sigmoid layers can shrink a gradient by a factor of about <span class="arithmatex">\(10^{-6}\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Fix</th>
+<th>How it helps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><abbr title="Rectified Linear Unit">ReLU</abbr>-family activations</td>
+<td>Derivative 1 for active units</td>
+</tr>
+<tr>
+<td>Xavier / He initialization</td>
+<td>Keeps activation and gradient variance stable across layers at the start</td>
+</tr>
+<tr>
+<td>Normalization (BatchNorm, LayerNorm)</td>
+<td>Keeps activations in a healthy range during training</td>
+</tr>
+<tr>
+<td>Residual connections</td>
+<td>An identity path adds a direct route for gradients: <span class="arithmatex">\(\frac{\partial}{\partial x}(x + F(x)) = I + F'(x)\)</span></td>
+</tr>
+<tr>
+<td>Gated RNNs (<abbr title="Long Short-Term Memory">LSTM</abbr>, <abbr title="Gated Recurrent Unit">GRU</abbr>)</td>
+<td>Additive memory updates instead of repeated multiplication</td>
+</tr>
+<tr>
+<td>Gradient clipping</td>
+<td>Caps the gradient norm to stop explosions (standard for RNNs and Transformers)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="weight-initialization">Weight initialization<a class="headerlink" href="#weight-initialization" title="Permanent link">&para;</a></h2>
+<p><strong>Why not zeros?</strong> Every unit in a layer would compute the same output and receive the same gradient, so they'd stay identical forever (the symmetry problem). Random initialization breaks the symmetry, and its <strong>scale</strong> determines whether signals vanish or explode.</p>
+<table>
+<thead>
+<tr>
+<th>Scheme</th>
+<th>Variance</th>
+<th>Designed for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Xavier / Glorot</strong> (2010)</td>
+<td><span class="arithmatex">\(\operatorname{Var}(W) = \frac{2}{n_{in} + n_{out}}\)</span></td>
+<td>Tanh, sigmoid</td>
+</tr>
+<tr>
+<td><strong>He / Kaiming</strong> (2015)</td>
+<td><span class="arithmatex">\(\operatorname{Var}(W) = \frac{2}{n_{in}}\)</span></td>
+<td><abbr title="Rectified Linear Unit">ReLU</abbr> (which zeroes half the inputs, hence the factor 2)</td>
+</tr>
+<tr>
+<td><strong>Transformers</strong></td>
+<td>Normal with std about 0.02; output projections of residual branches scaled down by depth</td>
+<td>Stable deep residual stacks</td>
+</tr>
+</tbody>
+</table>
+<p>The idea behind both: a sum of <span class="arithmatex">\(n_{in}\)</span> terms has variance <span class="arithmatex">\(n_{in}\operatorname{Var}(w)\operatorname{Var}(x)\)</span>, so choosing <span class="arithmatex">\(\operatorname{Var}(w) \propto 1/n_{in}\)</span> keeps the output variance close to the input variance.</p>
+<h2 id="what-came-next-and-why">What came next, and why<a class="headerlink" href="#what-came-next-and-why" title="Permanent link">&para;</a></h2>
+<p>Fundamentals made deep networks possible; training them well needed better <strong>optimizers</strong> (momentum, Adam), <strong>normalization</strong>, <strong>regularization</strong> (dropout, augmentation) and <strong>schedules</strong>. See <a href="../training/">Training Deep Networks</a>. Architectures then specialized: <strong>CNNs</strong> for grids (<a href="../cnn-vision/">CNNs &amp; Computer Vision</a>) and <strong>RNNs</strong> for sequences (<a href="../sequence-models/">Sequence Models</a>).</p>
+<h2 id="interview-questions">Interview questions<a class="headerlink" href="#interview-questions" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Why can't a single perceptron learn XOR?</summary>
+<p>A perceptron's decision boundary is a single line (hyperplane). XOR's positive points (0,1) and (1,0) sit on one diagonal and the negatives (0,0) and (1,1) on the other, so no single line separates them. One hidden layer fixes it: two hidden units can compute OR and NAND (or AND), and the output combines them, which is exactly the feature engineering a linear model can't do for itself.</p>
+</details>
+<details class="question">
+<summary>Why do neural networks need non-linear activations?</summary>
+<p>Without them, a stack of linear layers is just one linear map, <span class="arithmatex">\(W_n \cdots W_1 x\)</span>, so depth adds no expressive power and the network can only represent linear functions. The non-linearity between layers lets each layer bend and fold the space so later layers can separate classes that weren't linearly separable.</p>
+</details>
+<details class="question">
+<summary>What does the universal approximation theorem say, and what doesn't it say?</summary>
+<p>One hidden layer with enough units and a suitable non-linearity can approximate any continuous function on a compact domain arbitrarily well. It doesn't say how many units are needed (possibly exponentially many), that gradient descent will find the weights, or that the network will generalize from finite data. Deep networks achieve the same with far fewer parameters by composing features.</p>
+</details>
+<details class="question">
+<summary>Derive backpropagation for a two-layer network.</summary>
+<p>With <span class="arithmatex">\(Z_1 = XW_1 + b_1\)</span>, <span class="arithmatex">\(A_1 = \text{ReLU}(Z_1)\)</span>, <span class="arithmatex">\(Z_2 = A_1W_2 + b_2\)</span> and softmax cross-entropy: <span class="arithmatex">\(\partial Z_2 = (P - Y)/n\)</span>; <span class="arithmatex">\(\partial W_2 = A_1^\top \partial Z_2\)</span>; <span class="arithmatex">\(\partial b_2 = \sum_{\text{rows}} \partial Z_2\)</span>; <span class="arithmatex">\(\partial A_1 = \partial Z_2 W_2^\top\)</span>; <span class="arithmatex">\(\partial Z_1 = \partial A_1 \odot \mathbb{1}[Z_1 &gt; 0]\)</span>; <span class="arithmatex">\(\partial W_1 = X^\top \partial Z_1\)</span>; <span class="arithmatex">\(\partial b_1 = \sum_{\text{rows}} \partial Z_1\)</span>. State shapes as you go; a shape mismatch is the fastest way to catch an error.</p>
+</details>
+<details class="question">
+<summary>Why is backpropagation efficient compared with computing each gradient separately?</summary>
+<p>It reuses intermediate results. The gradient flowing into each layer is computed once and shared by all parameters below it, so the total cost is a small constant multiple (about 2–3×) of a forward pass, regardless of how many parameters there are. Finite differences would need one or two forward passes per parameter, which is impossible for millions or billions of parameters.</p>
+</details>
+<details class="question">
+<summary>Why does backprop need to store activations, and what is gradient checkpointing?</summary>
+<p>The gradient of a layer's weights depends on that layer's input (<span class="arithmatex">\(\partial W = A^\top \partial Z\)</span>) and activation derivatives depend on pre-activations, so the forward values must be kept until the backward pass reaches that layer. Memory grows with depth, batch size and sequence length. Gradient checkpointing stores activations only at some layers and recomputes the others during the backward pass, trading extra compute for a large memory saving; it's standard in <abbr title="Large Language Model">LLM</abbr> training.</p>
+</details>
+<details class="question">
+<summary>Why does sigmoid cause vanishing gradients?</summary>
+<p>Its derivative <span class="arithmatex">\(\sigma(x)(1 - \sigma(x))\)</span> is at most 0.25 (at <span class="arithmatex">\(x = 0\)</span>) and close to 0 when the unit saturates. Backprop multiplies one such factor per layer, so gradients shrink exponentially with depth; the early layers barely learn. It's also not zero-centered, which makes gradient updates zig-zag. Hidden layers therefore use <abbr title="Rectified Linear Unit">ReLU</abbr>-family activations, and sigmoid stays at outputs and inside gates.</p>
+</details>
+<details class="question">
+<summary>Why <abbr title="Rectified Linear Unit">ReLU</abbr> over sigmoid in hidden layers?</summary>
+<p><abbr title="Rectified Linear Unit">ReLU</abbr>'s gradient is exactly 1 for positive inputs, so it doesn't shrink gradients through active units; it's very cheap to compute; and it produces sparse activations. That made deep networks much faster to train (AlexNet reported several times faster convergence than tanh). Its weakness is dying units; Leaky <abbr title="Rectified Linear Unit">ReLU</abbr>, ELU or <abbr title="Gaussian Error Linear Unit">GELU</abbr> address that.</p>
+</details>
+<details class="question">
+<summary>What is the dying <abbr title="Rectified Linear Unit">ReLU</abbr> problem and how do you fix it?</summary>
+<p>If a unit's pre-activation becomes negative for every input (for example after a large update or with a large negative bias), its output and gradient are zero forever, so it never recovers. Fixes: Leaky <abbr title="Rectified Linear Unit">ReLU</abbr> or PReLU (small slope for negative inputs), ELU or <abbr title="Gaussian Error Linear Unit">GELU</abbr>, lower learning rates, He initialization, and normalization layers.</p>
+</details>
+<details class="question">
+<summary>Why do LLMs use <abbr title="Gaussian Error Linear Unit">GELU</abbr> or SwiGLU instead of <abbr title="Rectified Linear Unit">ReLU</abbr>?</summary>
+<p>Smooth activations give smoother loss surfaces and keep small gradients for negative inputs, and empirically they train Transformers to lower loss. SwiGLU, a gated linear unit using SiLU, adds a multiplicative gate inside the feed-forward layer, which performed best in Shazeer's comparison of GLU variants and was adopted by PaLM and LLaMA. To keep parameter count equal, the hidden width is usually reduced from <span class="arithmatex">\(4d\)</span> to about <span class="arithmatex">\(\tfrac{8}{3}d\)</span>.</p>
+</details>
+<details class="question">
+<summary>Why not initialize all weights to zero?</summary>
+<p>All units in a layer would receive identical inputs, compute identical outputs and get identical gradients, so they would remain identical: the layer behaves like a single unit (the symmetry problem). Random initialization breaks the symmetry. Biases can start at zero.</p>
+</details>
+<details class="question">
+<summary>Xavier vs He initialization.</summary>
+<p>Both pick the weight variance so activations and gradients keep roughly constant variance across layers. Xavier uses <span class="arithmatex">\(\frac{2}{n_{in} + n_{out}}\)</span>, derived for symmetric activations like tanh. He uses <span class="arithmatex">\(\frac{2}{n_{in}}\)</span>, accounting for <abbr title="Rectified Linear Unit">ReLU</abbr> zeroing about half of its inputs, which halves the variance. Using Xavier with deep <abbr title="Rectified Linear Unit">ReLU</abbr> networks makes activations shrink layer by layer.</p>
+</details>
+<details class="question">
+<summary>Why subtract the maximum before computing softmax?</summary>
+<p><span class="arithmatex">\(e^{z}\)</span> overflows for large logits (above about 88 in float32). Softmax is unchanged by subtracting a constant from every logit, so subtracting the maximum makes the largest exponent <span class="arithmatex">\(e^0 = 1\)</span> and all others smaller, avoiding overflow. For the loss, use log-softmax with the log-sum-exp trick so you never take the log of an underflowed zero.</p>
+</details>
+<details class="question">
+<summary>How do you detect and fix exploding gradients?</summary>
+<p>Symptoms: loss suddenly becomes NaN or spikes, very large gradient norms, weights blowing up. Monitor the global gradient norm per step. Fixes: gradient clipping by global norm (commonly 1.0), a lower learning rate or warmup, better initialization, normalization layers, residual connections, and checking the data for extreme values or bad labels.</p>
+</details>
+<details class="question">
+<summary>Reverse-mode vs forward-mode automatic differentiation.</summary>
+<p>Reverse mode (backprop) computes the gradient of one output with respect to all inputs in one backward pass, ideal when the output is a scalar loss and the inputs are billions of parameters. Forward mode carries derivatives forward alongside values, one input direction per pass, which is efficient for functions with few inputs and many outputs. Jacobian–vector products use forward mode and vector–Jacobian products use reverse mode.</p>
+</details>
+<div class="admonition pitfall">
+<p class="admonition-title">Common mistakes</p>
+<ul>
+<li>Saying the universal approximation theorem means one layer is enough in practice.</li>
+<li>Applying softmax and then a cross-entropy that applies softmax again.</li>
+<li>Computing losses from probabilities instead of logits.</li>
+<li>Forgetting the factor 2 in He initialization, or why it's there.</li>
+<li>Confusing vanishing gradients (early layers stop learning) with overfitting.</li>
+</ul>
+</div>
+<h2 id="revision-checklist">Revision checklist<a class="headerlink" href="#revision-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain why XOR needs a hidden layer and why activations must be non-linear</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Count the parameters of an <abbr title="Multi-Layer Perceptron">MLP</abbr></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Derive backprop for a two-layer network with shapes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compare sigmoid, tanh, <abbr title="Rectified Linear Unit">ReLU</abbr>, <abbr title="Gaussian Error Linear Unit">GELU</abbr> and SwiGLU</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain vanishing and exploding gradients and five fixes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State Xavier and He initialization and the reasoning behind them</li>
+</ul>
+<h2 id="go-deeper">Go deeper<a class="headerlink" href="#go-deeper" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://karpathy.ai/zero-to-hero.html">Karpathy: Neural Networks, Zero to Hero</a>, starting with micrograd</li>
+<li><a href="https://www.3blue1brown.com/topics/neural-networks">3Blue1Brown: Neural networks</a></li>
+<li><a href="https://d2l.ai/">Dive into Deep Learning</a>, chapters 4 and 5</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../classical-ml/recommender-systems/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Recommender Systems">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Recommender Systems
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../training/" class="md-footer__link md-footer__link--next" aria-label="Next: Training Deep Networks">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Training Deep Networks
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Built for interview preparation. Corrections welcome through GitHub issues and pull requests.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rajan-021/AI-ML" target="_blank" rel="noopener" title="Source on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.action.edit", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../assets/js/katex-init.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../../assets/js/app.js"></script>
+      
+    
+  </body>
+</html>

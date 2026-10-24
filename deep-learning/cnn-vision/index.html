@@ -1,0 +1,3285 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Convolutions and their arithmetic, the architecture line from LeNet to ResNet and ConvNeXt, detection and segmentation, Vision Transformers, and self-supervised and contrastive learning including CLIP.">
+      
+      
+        <meta name="author" content="rajan-021">
+      
+      
+        <link rel="canonical" href="https://rajan-021.github.io/AI-ML/deep-learning/cnn-vision/">
+      
+      
+        <link rel="prev" href="../training/">
+      
+      
+        <link rel="next" href="../sequence-models/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>CNNs & Computer Vision - AI/ML Interview Map</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%203C6.5%203%202%206.6%202%2011c0%202.2%201.1%204.2%202.8%205.5%200%20.6-.4%202.2-2.8%204.5%202.4-.1%204.6-1%206.5-2.5%201.1.3%202.3.5%203.5.5%205.5%200%2010-3.6%2010-8s-4.5-8-10-8m0%2014c-4.4%200-8-2.7-8-6s3.6-6%208-6%208%202.7%208%206-3.6%206-8%206m.2-10.5c-.9%200-1.6.2-2.1.5-.6.4-.9%201-.8%201.7h2q0-.45.3-.6c.2-.1.4-.2.7-.2s.6.1.8.3.3.4.3.7-.1.5-.2.7c-.2.2-.4.4-.6.5-.5.3-.9.6-1.1.8-.4.3-.5.6-.5%201.1h2c0-.3.1-.5.1-.7.1-.2.3-.3.5-.5.5-.2.8-.5%201.1-.9s.4-.8.4-1.2c0-.7-.3-1.3-.8-1.7-.4-.3-1.2-.5-2.1-.5M11%2013v2h2v-2z%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cnns-computer-vision" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  New here? Read <a href="../../start/how-to-use/">How to Use This Site</a> first, then test yourself with the <a href="../../practice/flashcards/">Flashcard Drill</a>.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI/ML Interview Map" class="md-header__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI/ML Interview Map
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CNNs & Computer Vision
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/math/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../classical-ml/linear-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Classical ML
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../neural-networks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../llms/transformer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Transformers & LLMs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../alignment/rl-essentials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Alignment & Reasoning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-engineering/prompting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../production/mlops/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Production
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../practice/ml-coding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Practice
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI/ML Interview Map" class="md-nav__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    AI/ML Interview Map
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use This Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/big-picture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Big Picture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/study-plans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Study Plans by Week and Role
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/interview-playbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math for ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/ml-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation & Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classical ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classical ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/linear-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear & Logistic Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/knn-nb-svm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    kNN, Naive Bayes & SVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/trees-ensembles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees & Ensembles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/unsupervised/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/recommender-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recommender Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Network Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Deep Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNNs & Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNNs & Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convolutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convolutions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-architecture-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The architecture line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The architecture line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-resnet-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why ResNet works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning-in-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transfer learning in vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segmentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-vision-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Vision Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-supervised-and-contrastive-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-supervised and contrastive learning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sequence-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence Models (RNN to Attention)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformers & LLMs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformers & LLMs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/efficient-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Efficient Attention & MoE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/pretraining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pretraining & LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/fine-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning & Efficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference & Serving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/generative-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alignment & Reasoning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alignment & Reasoning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/rl-essentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RL Essentials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/post-training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Training & Alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/reasoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reasoning Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prompt Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embeddings & Vector Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP & A2A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/context-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/harness-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating LLM Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails & Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Production
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLOps & LLMOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/ml-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/genai-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/responsible-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responsible AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/ml-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Coding from Scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/top-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Most-Asked Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/flashcards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flashcard Drill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convolutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convolutions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-architecture-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The architecture line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The architecture line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-resnet-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why ResNet works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning-in-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transfer learning in vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segmentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-vision-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Vision Transformer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-supervised-and-contrastive-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-supervised and contrastive learning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:applied-scientist" class="md-tag">Applied Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ml-engineer" class="md-tag">ML Engineer</a>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/rajan-021/AI-ML/edit/main/docs/deep-learning/cnn-vision.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="cnns-computer-vision">CNNs &amp; Computer Vision<a class="headerlink" href="#cnns-computer-vision" title="Permanent link">&para;</a></h1><div class="study-bar" data-page="deep-learning/cnn-vision/" data-minutes="16" data-questions="17" data-act="2" data-priority="High"></div>
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<p><strong>Convolutions</strong> slide small shared filters over an image, giving translation equivariance with few parameters. <strong>AlexNet</strong> (2012) proved deep CNNs on GPUs beat hand-made features; <strong>ResNet</strong> (2015) made very deep networks trainable with skip connections. Detection (Faster R-<abbr title="Convolutional Neural Network">CNN</abbr>, YOLO) and segmentation (U-Net, Mask R-<abbr title="Convolutional Neural Network">CNN</abbr>) build on <abbr title="Convolutional Neural Network">CNN</abbr> backbones. The <strong>Vision Transformer</strong> treats image patches as tokens and scales better with data. <strong>Contrastive learning</strong> (SimCLR, CLIP) learns from unlabeled images or image–caption pairs, and CLIP-style encoders now feed multimodal LLMs.</p>
+</div>
+<div class="admonition evolution">
+<p class="admonition-title">Where this fits</p>
+<p><strong>Before:</strong> <a href="../neural-networks/">MLPs and backprop</a>, <a href="../training/">training techniques</a>. <strong>This page:</strong> the first domain where deep learning won decisively. <strong>Next:</strong> <a href="../sequence-models/">Sequence Models</a> for text and time; the <a href="../../llms/transformer/">Transformer</a> later unifies vision and language.</p>
+</div>
+<h2 id="convolutions">Convolutions<a class="headerlink" href="#convolutions" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> an <abbr title="Multi-Layer Perceptron">MLP</abbr> on a 224×224×3 image needs about 150,000 weights per hidden unit and has no idea that a cat in the top-left corner is the same as a cat in the bottom-right.</p>
+<p><strong>Core idea:</strong> use small filters (for example 3×3) whose weights are <strong>shared</strong> across all positions. Each filter detects one pattern wherever it appears.</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kernel / filter</strong></td>
+<td>A <span class="arithmatex">\(k \times k \times C_{in}\)</span> weight tensor; a layer has <span class="arithmatex">\(C_{out}\)</span> of them</td>
+</tr>
+<tr>
+<td><strong>Stride</strong></td>
+<td>Step between filter positions; stride 2 halves the resolution</td>
+</tr>
+<tr>
+<td><strong>Padding</strong></td>
+<td>Zeros around the border; "same" padding keeps the size</td>
+</tr>
+<tr>
+<td><strong>Output size</strong></td>
+<td><span class="arithmatex">\(\left\lfloor \frac{W - k + 2p}{s} \right\rfloor + 1\)</span></td>
+</tr>
+<tr>
+<td><strong>Parameters</strong></td>
+<td><span class="arithmatex">\((k \cdot k \cdot C_{in} + 1) \cdot C_{out}\)</span>, independent of image size</td>
+</tr>
+<tr>
+<td><strong>Receptive field</strong></td>
+<td>The input region that affects one output; grows with depth, stride and pooling</td>
+</tr>
+<tr>
+<td><strong>Pooling</strong></td>
+<td>Max or average over small windows; downsamples and adds small translation invariance</td>
+</tr>
+<tr>
+<td><strong>1×1 convolution</strong></td>
+<td>Mixes channels at each position; cheap way to change channel count</td>
+</tr>
+<tr>
+<td><strong>Depthwise separable</strong></td>
+<td>A per-channel spatial filter, then a 1×1 to mix channels; about <span class="arithmatex">\(k^2\)</span> times cheaper (MobileNet)</td>
+</tr>
+<tr>
+<td><strong>Dilated (atrous)</strong></td>
+<td>Gaps between kernel taps; bigger receptive field without more parameters (DeepLab)</td>
+</tr>
+<tr>
+<td><strong>Transposed convolution</strong></td>
+<td>Learned upsampling (decoders, segmentation)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Worked example: shapes and parameters</summary>
+<p>A 3×3 convolution from 64 to 128 channels, stride 1, padding 1, on a 56×56 input: output is 56×56×128 and parameters are <span class="arithmatex">\(3\cdot3\cdot64\cdot128 + 128 = 73{,}856\)</span>. With stride 2 the output becomes 28×28×128 and the parameter count doesn't change.</p>
+<p>Two stacked 3×3 layers see a 5×5 region with <span class="arithmatex">\(2 \cdot 9C^2 = 18C^2\)</span> weights instead of <span class="arithmatex">\(25C^2\)</span> for one 5×5 layer, plus an extra non-linearity. That's why VGG used only 3×3 filters.</p>
+</details>
+<p><strong>Inductive biases:</strong> locality (nearby pixels matter together), weight sharing (the same pattern can appear anywhere) and a hierarchy of features. Convolution is <strong>translation-equivariant</strong> (shift the input, the feature map shifts the same way); pooling and global averaging add approximate <strong>invariance</strong>. These biases make CNNs data-efficient, and they're exactly what ViTs give up in exchange for flexibility.</p>
+<h2 id="the-architecture-line">The architecture line<a class="headerlink" href="#the-architecture-line" title="Permanent link">&para;</a></h2>
+<div class="metro act-2">
+<ul>
+<li><strong>LeNet-5</strong> <span class="yr">1998</span><br>Convolution, pooling, then dense layers for digits. Small images, little compute.</li>
+<li><strong>AlexNet</strong> <span class="yr">2012</span><br>8 layers, <abbr title="Rectified Linear Unit">ReLU</abbr>, dropout, data augmentation, two GPUs. ImageNet top-5 error 15.3% vs about 26% for the runner-up.</li>
+<li><strong>VGG</strong> <span class="yr">2014</span><br>Uniform stacks of 3×3 convolutions, 16–19 layers. Simple but heavy (about 138M parameters).</li>
+<li><strong>GoogLeNet / Inception</strong> <span class="yr">2014</span><br>Parallel 1×1, 3×3, 5×5 branches with 1×1 bottlenecks: wide and efficient.</li>
+<li><strong>ResNet</strong> <span class="yr">2015</span><br>Residual blocks <span class="arithmatex">\(y = F(x) + x\)</span>; 152 layers; 3.57% top-5 error. Deeper finally meant better.</li>
+<li><strong>DenseNet</strong> <span class="yr">2016</span><br>Each layer receives all previous feature maps; strong reuse of features.</li>
+<li><strong>MobileNet · EfficientNet</strong> <span class="yr">2017–2019</span><br>Depthwise separable convolutions; compound scaling of depth, width and resolution.</li>
+<li><strong>ConvNeXt</strong> <span class="yr">2022</span><br>A <abbr title="Convolutional Neural Network">CNN</abbr> modernized with Transformer-era choices (large kernels, LayerNorm, <abbr title="Gaussian Error Linear Unit">GELU</abbr>) that matches ViTs.</li>
+</ul>
+</div>
+<h3 id="why-resnet-works">Why ResNet works<a class="headerlink" href="#why-resnet-works" title="Permanent link">&para;</a></h3>
+<p><strong>The degradation problem:</strong> adding layers to a plain deep network made <em>training</em> error worse, not just test error. That isn't overfitting; it's an optimization failure. A deeper network could in principle copy the shallower one and set the extra layers to identity, but plain layers find identity hard to learn.</p>
+<p>A residual block learns only the change: <span class="arithmatex">\(y = F(x) + x\)</span>. If identity is best, the block pushes <span class="arithmatex">\(F\)</span> toward zero, which is easy. The skip connection also gives gradients a direct path: <span class="arithmatex">\(\frac{\partial y}{\partial x} = I + \frac{\partial F}{\partial x}\)</span>, so signals reach early layers even when <span class="arithmatex">\(F\)</span>'s gradient is small. <strong>Bottleneck blocks</strong> (1×1 reduce → 3×3 → 1×1 expand) keep very deep ResNets affordable. Every Transformer block uses the same residual idea.</p>
+<h3 id="transfer-learning-in-vision">Transfer learning in vision<a class="headerlink" href="#transfer-learning-in-vision" title="Permanent link">&para;</a></h3>
+<p>Use a backbone pretrained on a large dataset (ImageNet, or a self-supervised or CLIP model), then:</p>
+<ul>
+<li><strong>Small data, similar domain:</strong> freeze the backbone, train a new head (linear probing).</li>
+<li><strong>More data or a different domain:</strong> fine-tune the whole network with a lower learning rate for early layers.</li>
+<li>Match the pretraining preprocessing (resolution, normalization) and use augmentation.</li>
+</ul>
+<h2 id="object-detection">Object detection<a class="headerlink" href="#object-detection" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> classification says <em>what</em>; detection also says <em>where</em>, as boxes with classes, often many per image.</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Examples</th>
+<th>Idea</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Two-stage</strong></td>
+<td>R-<abbr title="Convolutional Neural Network">CNN</abbr> (2014) → Fast R-<abbr title="Convolutional Neural Network">CNN</abbr> → Faster R-<abbr title="Convolutional Neural Network">CNN</abbr> (2015)</td>
+<td>Propose regions (a region proposal network), then classify and refine each</td>
+<td>Accurate, slower</td>
+</tr>
+<tr>
+<td><strong>One-stage</strong></td>
+<td>YOLO (2015 onward), SSD, RetinaNet (2017)</td>
+<td>Predict classes and boxes densely in one pass</td>
+<td>Real-time; RetinaNet's focal loss closed the accuracy gap</td>
+</tr>
+<tr>
+<td><strong>Anchor-free</strong></td>
+<td>FCOS, CenterNet</td>
+<td>Predict box centers or distances directly, no predefined anchor boxes</td>
+<td>Simpler, fewer hyperparameters</td>
+</tr>
+<tr>
+<td><strong>Transformer-based</strong></td>
+<td>DETR (2020)</td>
+<td>Learned object queries plus set matching (Hungarian) to ground truth; no NMS</td>
+<td>Elegant; slower to train originally</td>
+</tr>
+</tbody>
+</table>
+<p>Key pieces:</p>
+<ul>
+<li><strong><abbr title="Intersection over Union">IoU</abbr></strong> (intersection over union) measures box overlap: <span class="arithmatex">\(\frac{|A \cap B|}{|A \cup B|}\)</span>.</li>
+<li><strong>Non-max suppression</strong> removes duplicate boxes: keep the highest-scoring box, drop others overlapping it above an <abbr title="Intersection over Union">IoU</abbr> threshold, repeat.</li>
+<li><strong>mAP:</strong> average precision per class from the precision–recall curve at an <abbr title="Intersection over Union">IoU</abbr> threshold (for example 0.5, or averaged over 0.5–0.95 in COCO), then averaged over classes.</li>
+<li><strong>Feature Pyramid Networks</strong> combine coarse, semantic features with fine, high-resolution ones to detect objects at many scales.</li>
+<li><strong>Focal loss:</strong> <span class="arithmatex">\(FL(p_t) = -(1 - p_t)^\gamma \log p_t\)</span> down-weights the flood of easy background examples so training focuses on hard ones.</li>
+</ul>
+<h2 id="segmentation">Segmentation<a class="headerlink" href="#segmentation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Output</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Semantic</strong></td>
+<td>A class per pixel</td>
+<td>FCN, U-Net (2015), DeepLab</td>
+</tr>
+<tr>
+<td><strong>Instance</strong></td>
+<td>A mask per object instance</td>
+<td>Mask R-<abbr title="Convolutional Neural Network">CNN</abbr> (2017)</td>
+</tr>
+<tr>
+<td><strong>Panoptic</strong></td>
+<td>Both: every pixel gets a class and, for objects, an instance</td>
+<td>Panoptic FPN, Mask2Former</td>
+</tr>
+<tr>
+<td><strong>Promptable</strong></td>
+<td>A mask for whatever you point at or describe</td>
+<td>Segment Anything (2023)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>U-Net</strong> uses an encoder–decoder with <strong>skip connections</strong> from each encoder level to the matching decoder level, so fine spatial detail lost during downsampling is restored when upsampling. It's still the standard in medical imaging and is the backbone of many diffusion models. Metrics: mean <abbr title="Intersection over Union">IoU</abbr> per class and the <strong>Dice coefficient</strong> <span class="arithmatex">\(\frac{2|A \cap B|}{|A| + |B|}\)</span>.</p>
+<h2 id="the-vision-transformer">The Vision Transformer<a class="headerlink" href="#the-vision-transformer" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> CNNs' locality is helpful with limited data, but it limits global context and seemed to scale less well than Transformers did in language.</p>
+<p><strong>Core idea:</strong> split the image into patches (for example 16×16 pixels, so a 224×224 image becomes 196 tokens), linearly embed each patch, add position embeddings and a [CLS] token, and run a standard Transformer encoder.</p>
+<ul>
+<li>Weak built-in assumptions, so <abbr title="Vision Transformer">ViT</abbr> needs <strong>lots of data</strong>: it beat CNNs only when pretrained on very large datasets (JFT-300M). <strong>DeiT</strong> showed strong augmentation and distillation make it competitive on ImageNet alone.</li>
+<li>Attention cost grows with the square of the number of patches, a problem at high resolution. <strong>Swin Transformer</strong> uses shifted local windows and a hierarchy, like a <abbr title="Convolutional Neural Network">CNN</abbr>, to fix this.</li>
+<li>One architecture for text and images made multimodal models natural.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><abbr title="Convolutional Neural Network">CNN</abbr></th>
+<th><abbr title="Vision Transformer">ViT</abbr></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Built-in assumptions</td>
+<td>Locality, translation equivariance, hierarchy</td>
+<td>Almost none; learns them from data</td>
+</tr>
+<tr>
+<td>Data efficiency</td>
+<td>High</td>
+<td>Low without huge pretraining or heavy augmentation</td>
+</tr>
+<tr>
+<td>Global context</td>
+<td>Grows slowly with depth</td>
+<td>From the first layer</td>
+</tr>
+<tr>
+<td>Scaling with data and compute</td>
+<td>Good</td>
+<td>Better at large scale</td>
+</tr>
+<tr>
+<td>High-resolution cost</td>
+<td>Linear in pixels</td>
+<td>Quadratic in patches (unless windowed)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="self-supervised-and-contrastive-learning">Self-supervised and contrastive learning<a class="headerlink" href="#self-supervised-and-contrastive-learning" title="Permanent link">&para;</a></h2>
+<p><strong>The problem:</strong> labels are expensive, but unlabeled images and image–caption pairs are abundant.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Year</th>
+<th>Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SimCLR</strong></td>
+<td>2020</td>
+<td>Two augmentations of the same image are positives; other images in the batch are negatives; InfoNCE loss. Needs large batches.</td>
+</tr>
+<tr>
+<td><strong>MoCo</strong></td>
+<td>2019</td>
+<td>A momentum-updated encoder and a queue of negatives, so batches can be small</td>
+</tr>
+<tr>
+<td><strong>BYOL, DINO</strong></td>
+<td>2020, 2021</td>
+<td>No negatives: a student matches a slowly updated teacher's output on another view</td>
+</tr>
+<tr>
+<td><strong><abbr title="Mean Absolute Error">MAE</abbr></strong></td>
+<td>2021</td>
+<td>Mask 75% of patches and reconstruct them; very efficient for ViTs</td>
+</tr>
+<tr>
+<td><strong>CLIP</strong></td>
+<td>2021</td>
+<td>Image and text encoders trained contrastively on 400M image–caption pairs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The InfoNCE loss</strong> for a positive pair <span class="arithmatex">\((q, k^+)\)</span> among negatives <span class="arithmatex">\(k_j\)</span>: <span class="arithmatex">\(L = -\log\frac{\exp(q \cdot k^+/\tau)}{\sum_j \exp(q \cdot k_j/\tau)}\)</span>, with temperature <span class="arithmatex">\(\tau\)</span>. It's a softmax classification of "which of these is my partner", which is why more negatives (bigger batches) help.</p>
+<p><strong>CLIP</strong> trains with a symmetric version of that loss over a batch of N image–caption pairs: the N matching pairs should score highest among all N² combinations. <strong>Zero-shot classification:</strong> embed prompts like "a photo of a {label}" for every class and pick the class whose text embedding is closest to the image embedding. CLIP's zero-shot ImageNet accuracy matched a fully supervised ResNet-50. Its text encoder conditions text-to-image diffusion models, and CLIP or SigLIP vision encoders feed most <a href="../../llms/generative-models/">multimodal LLMs</a>.</p>
+<h2 id="interview-questions">Interview questions<a class="headerlink" href="#interview-questions" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Compute the output size and parameter count of a convolutional layer.</summary>
+<p>Output width <span class="arithmatex">\(= \lfloor (W - k + 2p)/s \rfloor + 1\)</span> (same for height); output depth is the number of filters <span class="arithmatex">\(C_{out}\)</span>. Parameters <span class="arithmatex">\(= (k \cdot k \cdot C_{in} + 1)\cdot C_{out}\)</span> with biases. Example: 224×224×3 input, 64 filters of 7×7, stride 2, padding 3 → 112×112×64 output with <span class="arithmatex">\(7\cdot7\cdot3\cdot64 + 64 = 9{,}472\)</span> parameters. The count doesn't depend on image size; the compute does.</p>
+</details>
+<details class="question">
+<summary>Why share weights in a <abbr title="Convolutional Neural Network">CNN</abbr>?</summary>
+<p>It encodes the assumption that a useful pattern (an edge, an eye) can appear anywhere, so the same detector should be applied everywhere. That cuts parameters by orders of magnitude, improves data efficiency because every position provides training signal for the same filter, and makes the layer translation-equivariant.</p>
+</details>
+<details class="question">
+<summary>What does a 1×1 convolution do?</summary>
+<p>At each spatial position it computes a linear combination of the input channels, like a dense layer applied per pixel. It changes the number of channels cheaply (bottlenecks in Inception and ResNet), mixes information across channels, and adds a non-linearity when followed by an activation. In depthwise separable convolutions it's the "pointwise" step.</p>
+</details>
+<details class="question">
+<summary>Equivariance vs invariance.</summary>
+<p>A function is <strong>equivariant</strong> to translation if shifting the input shifts the output the same way: convolution feature maps move with the object. It's <strong>invariant</strong> if shifting the input leaves the output unchanged: a classifier's "cat" score. CNNs are equivariant through convolutions and become approximately invariant through pooling, striding and global average pooling at the end.</p>
+</details>
+<details class="question">
+<summary>What is a receptive field and how do you grow it?</summary>
+<p>The region of the input that can influence a given output unit. It grows with depth (each 3×3 layer adds 2 pixels), with stride and pooling (which multiply the growth of later layers), and with dilated convolutions. Large receptive fields are needed for context, such as recognizing large objects or segmenting with scene context. The effective receptive field is usually smaller than the theoretical one and concentrated near the center.</p>
+</details>
+<details class="question">
+<summary>Why did AlexNet matter so much?</summary>
+<p>In 2012 it cut ImageNet top-5 error from about 26% to 15.3%, a far larger jump than incremental improvements to hand-crafted features. It combined a deep <abbr title="Convolutional Neural Network">CNN</abbr>, <abbr title="Rectified Linear Unit">ReLU</abbr> (much faster training than tanh), dropout, data augmentation, and training on GPUs with a large labeled dataset. It convinced the field that learned features beat engineered ones given enough data and compute, which started the deep-learning era.</p>
+</details>
+<details class="question">
+<summary>Explain the degradation problem and how ResNet solves it.</summary>
+<p>Plain networks deeper than about 20 layers had higher <em>training</em> error than shallower ones, an optimization problem, not overfitting. ResNet adds identity skip connections so each block learns a residual <span class="arithmatex">\(F(x)\)</span> and outputs <span class="arithmatex">\(F(x) + x\)</span>. Learning identity becomes trivial (drive <span class="arithmatex">\(F\)</span> toward zero), and gradients flow directly through the skip paths (<span class="arithmatex">\(\partial y/\partial x = I + \partial F/\partial x\)</span>). This made 100- to 1000-layer networks trainable.</p>
+</details>
+<details class="question">
+<summary>Why use two 3×3 convolutions instead of one 5×5?</summary>
+<p>Same receptive field (5×5), fewer parameters (<span class="arithmatex">\(18C^2\)</span> vs <span class="arithmatex">\(25C^2\)</span>), and an extra non-linearity between them, which makes the function more expressive. Three 3×3 layers similarly replace a 7×7 (<span class="arithmatex">\(27C^2\)</span> vs <span class="arithmatex">\(49C^2\)</span>).</p>
+</details>
+<details class="question">
+<summary>How much does a depthwise separable convolution save?</summary>
+<p>A standard convolution costs about <span class="arithmatex">\(k^2 C_{in} C_{out}\)</span> multiply-adds per position. Depthwise separable splits it into a per-channel <span class="arithmatex">\(k \times k\)</span> filter (<span class="arithmatex">\(k^2 C_{in}\)</span>) plus a 1×1 pointwise convolution (<span class="arithmatex">\(C_{in} C_{out}\)</span>). The ratio is <span class="arithmatex">\(\frac{1}{C_{out}} + \frac{1}{k^2}\)</span>, so about 8–9 times cheaper for 3×3 kernels, with a small accuracy cost. It's the core of MobileNet and EfficientNet.</p>
+</details>
+<details class="question">
+<summary>One-stage vs two-stage object detectors.</summary>
+<p>Two-stage detectors (Faster R-<abbr title="Convolutional Neural Network">CNN</abbr>) first propose candidate regions, then classify and refine each one: more accurate, especially on small objects, but slower. One-stage detectors (YOLO, SSD, RetinaNet) predict boxes and classes densely over the image in a single pass: fast enough for real time. RetinaNet's focal loss addressed the extreme foreground–background imbalance that had held one-stage accuracy back.</p>
+</details>
+<details class="question">
+<summary>Explain <abbr title="Intersection over Union">IoU</abbr>, non-max suppression and mAP.</summary>
+<p><strong><abbr title="Intersection over Union">IoU</abbr></strong> is the overlap between two boxes divided by their union; a detection usually counts as correct if its <abbr title="Intersection over Union">IoU</abbr> with a ground-truth box exceeds 0.5. <strong>Non-max suppression</strong> keeps the highest-scoring box and removes boxes that overlap it above an <abbr title="Intersection over Union">IoU</abbr> threshold, repeating until none remain. <strong>mAP</strong> computes average precision (the area under the precision–recall curve) per class and averages over classes; COCO averages it over <abbr title="Intersection over Union">IoU</abbr> thresholds from 0.5 to 0.95 too.</p>
+</details>
+<details class="question">
+<summary>Why does U-Net use skip connections?</summary>
+<p>The encoder downsamples to capture context but loses fine spatial detail. Skip connections pass high-resolution feature maps from each encoder level directly to the matching decoder level, where they're concatenated with the upsampled features. The decoder can then produce precise boundaries using both "what" (deep features) and "where" (shallow features). It works well even with small datasets, which is why it's standard in medical imaging.</p>
+</details>
+<details class="question">
+<summary>Why does focal loss help RetinaNet?</summary>
+<p>Dense detectors evaluate tens of thousands of candidate locations, nearly all easy background. With cross-entropy, these easy negatives dominate the total loss and gradients. Focal loss multiplies cross-entropy by <span class="arithmatex">\((1 - p_t)^\gamma\)</span> (often <span class="arithmatex">\(\gamma = 2\)</span>), shrinking the loss for well-classified examples so training concentrates on hard, misclassified ones. Combined with class-balancing weights, it let one-stage detectors match two-stage accuracy.</p>
+</details>
+<details class="question">
+<summary>How does <abbr title="Vision Transformer">ViT</abbr> turn an image into tokens, and why does it need so much data?</summary>
+<p>It cuts the image into fixed-size patches (for example 16×16), flattens each and projects it linearly to the model dimension, adds learned position embeddings, prepends a [CLS] token, and feeds the sequence to a Transformer encoder. Unlike a <abbr title="Convolutional Neural Network">CNN</abbr>, it has no built-in locality or translation equivariance, so it must learn those regularities from data. With limited data CNNs win; with very large pretraining datasets (or strong augmentation and distillation) <abbr title="Vision Transformer">ViT</abbr> matches or beats them.</p>
+</details>
+<details class="question">
+<summary><abbr title="Vision Transformer">ViT</abbr> vs <abbr title="Convolutional Neural Network">CNN</abbr>: which would you choose?</summary>
+<p>For small or medium datasets, edge devices or high-resolution dense prediction with tight compute, a <abbr title="Convolutional Neural Network">CNN</abbr> (or a hybrid) is often the better choice. With large pretraining data or a strong pretrained checkpoint, ViTs scale better and integrate naturally with language models. In practice you usually fine-tune a pretrained backbone, and modern CNNs (ConvNeXt) and ViTs perform similarly; choose based on available checkpoints, latency and deployment tooling.</p>
+</details>
+<details class="question">
+<summary>Explain the contrastive loss used by SimCLR and CLIP.</summary>
+<p>InfoNCE treats each example as a classification problem: among one positive and many negatives, pick the positive. <span class="arithmatex">\(L = -\log\frac{\exp(\text{sim}(q, k^+)/\tau)}{\sum_j \exp(\text{sim}(q, k_j)/\tau)}\)</span> with cosine similarity and temperature <span class="arithmatex">\(\tau\)</span>. SimCLR's positives are two augmented views of one image; CLIP's are an image and its caption, with the loss applied symmetrically in both directions. More negatives give a tighter bound and better representations, hence large batches.</p>
+</details>
+<details class="question">
+<summary>How does CLIP do zero-shot classification?</summary>
+<p>Embed each class name in a prompt such as "a photo of a {class}" with the text encoder, embed the image with the image encoder, and predict the class whose text embedding has the highest cosine similarity with the image embedding. No task-specific training is needed, and prompt wording and ensembling prompts change accuracy. Limits: it inherits web-data biases and struggles with counting, fine-grained distinctions and spatial relations.</p>
+</details>
+<div class="admonition pitfall">
+<p class="admonition-title">Common mistakes</p>
+<ul>
+<li>Forgetting that the parameter count of a convolution doesn't depend on input size.</li>
+<li>Saying ResNet solved overfitting (it solved an optimization problem).</li>
+<li>Confusing semantic and instance segmentation.</li>
+<li>Claiming ViTs are always better than CNNs.</li>
+<li>Mismatching preprocessing between pretraining and fine-tuning.</li>
+</ul>
+</div>
+<h2 id="revision-checklist">Revision checklist<a class="headerlink" href="#revision-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compute conv output sizes and parameter counts</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain receptive fields, 1×1 and depthwise separable convolutions</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Walk the line from LeNet to ResNet and explain the degradation problem</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain <abbr title="Intersection over Union">IoU</abbr>, NMS, mAP and focal loss</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain U-Net's skip connections</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Describe <abbr title="Vision Transformer">ViT</abbr>'s patching and its data needs</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain InfoNCE and CLIP zero-shot classification</li>
+</ul>
+<h2 id="go-deeper">Go deeper<a class="headerlink" href="#go-deeper" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://cs231n.github.io/">Stanford CS231n notes</a></li>
+<li><a href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition (2015)</a></li>
+<li><a href="https://arxiv.org/abs/2010.11929">An Image is Worth 16x16 Words (<abbr title="Vision Transformer">ViT</abbr>, 2020)</a></li>
+<li><a href="https://arxiv.org/abs/2103.00020">Learning Transferable Visual Models From Natural Language Supervision (CLIP, 2021)</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../training/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Training Deep Networks">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Training Deep Networks
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../sequence-models/" class="md-footer__link md-footer__link--next" aria-label="Next: Sequence Models (RNN to Attention)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Sequence Models (RNN to Attention)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Built for interview preparation. Corrections welcome through GitHub issues and pull requests.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rajan-021/AI-ML" target="_blank" rel="noopener" title="Source on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.action.edit", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../assets/js/katex-init.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../../assets/js/app.js"></script>
+      
+    
+  </body>
+</html>

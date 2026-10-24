@@ -1,0 +1,3584 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Classification, ranking, regression and probability metrics, calibration, and online evaluation with A/B tests, with the trade-offs interviewers probe.">
+      
+      
+        <meta name="author" content="rajan-021">
+      
+      
+        <link rel="canonical" href="https://rajan-021.github.io/AI-ML/foundations/evaluation/">
+      
+      
+        <link rel="prev" href="../ml-fundamentals/">
+      
+      
+        <link rel="next" href="../../classical-ml/linear-models/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Evaluation & Metrics - AI/ML Interview Map</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%203C6.5%203%202%206.6%202%2011c0%202.2%201.1%204.2%202.8%205.5%200%20.6-.4%202.2-2.8%204.5%202.4-.1%204.6-1%206.5-2.5%201.1.3%202.3.5%203.5.5%205.5%200%2010-3.6%2010-8s-4.5-8-10-8m0%2014c-4.4%200-8-2.7-8-6s3.6-6%208-6%208%202.7%208%206-3.6%206-8%206m.2-10.5c-.9%200-1.6.2-2.1.5-.6.4-.9%201-.8%201.7h2q0-.45.3-.6c.2-.1.4-.2.7-.2s.6.1.8.3.3.4.3.7-.1.5-.2.7c-.2.2-.4.4-.6.5-.5.3-.9.6-1.1.8-.4.3-.5.6-.5%201.1h2c0-.3.1-.5.1-.7.1-.2.3-.3.5-.5.5-.2.8-.5%201.1-.9s.4-.8.4-1.2c0-.7-.3-1.3-.8-1.7-.4-.3-1.2-.5-2.1-.5M11%2013v2h2v-2z%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#evaluation-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  New here? Read <a href="../../start/how-to-use/">How to Use This Site</a> first, then test yourself with the <a href="../../practice/flashcards/">Flashcard Drill</a>.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI/ML Interview Map" class="md-header__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI/ML Interview Map
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Evaluation & Metrics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../math/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../classical-ml/linear-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Classical ML
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deep-learning/neural-networks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../llms/transformer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Transformers & LLMs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../alignment/rl-essentials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Alignment & Reasoning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-engineering/prompting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../production/mlops/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Production
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../practice/ml-coding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Practice
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI/ML Interview Map" class="md-nav__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    AI/ML Interview Map
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use This Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/big-picture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Big Picture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/study-plans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Study Plans by Week and Role
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/interview-playbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math for ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation & Metrics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation & Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classification-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The confusion matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-by-the-cost-of-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing by the cost of mistakes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiclass-and-multilabel-averaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiclass and multilabel averaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threshold-free-metrics-roc-and-pr-curves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threshold-free metrics: ROC and PR curves
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probability-quality-and-calibration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probability quality and calibration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regression metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranking-and-retrieval-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranking and retrieval metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-generation-metrics-briefly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text generation metrics, briefly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-evaluation-and-ab-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online evaluation and A/B testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Online evaluation and A/B testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-and-analysing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running and analysing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-offline-and-online-results-disagree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why offline and online results disagree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classical ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classical ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/linear-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear & Logistic Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/knn-nb-svm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    kNN, Naive Bayes & SVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/trees-ensembles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees & Ensembles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/unsupervised/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/recommender-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recommender Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Network Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Deep Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/cnn-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNNs & Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/sequence-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence Models (RNN to Attention)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformers & LLMs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformers & LLMs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/efficient-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Efficient Attention & MoE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/pretraining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pretraining & LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/fine-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning & Efficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference & Serving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/generative-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alignment & Reasoning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alignment & Reasoning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/rl-essentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RL Essentials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/post-training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Training & Alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/reasoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reasoning Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prompt Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embeddings & Vector Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP & A2A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/context-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/harness-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating LLM Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails & Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Production
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLOps & LLMOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/ml-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/genai-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/responsible-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responsible AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/ml-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Coding from Scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/top-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Most-Asked Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/flashcards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flashcard Drill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classification-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The confusion matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-by-the-cost-of-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing by the cost of mistakes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiclass-and-multilabel-averaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiclass and multilabel averaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threshold-free-metrics-roc-and-pr-curves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threshold-free metrics: ROC and PR curves
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probability-quality-and-calibration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probability quality and calibration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regression metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranking-and-retrieval-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranking and retrieval metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-generation-metrics-briefly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text generation metrics, briefly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-evaluation-and-ab-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online evaluation and A/B testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Online evaluation and A/B testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-and-analysing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running and analysing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-offline-and-online-results-disagree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why offline and online results disagree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ai-engineer" class="md-tag">AI Engineer</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:applied-scientist" class="md-tag">Applied Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:data-scientist" class="md-tag">Data Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ml-engineer" class="md-tag">ML Engineer</a>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/rajan-021/AI-ML/edit/main/docs/foundations/evaluation.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="evaluation-metrics">Evaluation &amp; Metrics<a class="headerlink" href="#evaluation-metrics" title="Permanent link">&para;</a></h1><div class="study-bar" data-page="foundations/evaluation/" data-minutes="17" data-questions="17" data-act="0" data-priority="Critical"></div>
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<p>A metric encodes what a mistake costs. <strong>Precision</strong> asks "of what I flagged, how much was right?", <strong>recall</strong> asks "of what was there, how much did I find?". <strong>ROC-<abbr title="Area Under the Curve">AUC</abbr></strong> measures ranking and can look great under heavy imbalance; <strong>PR-<abbr title="Area Under the Curve">AUC</abbr></strong> exposes it. <strong>Calibration</strong> checks that a predicted 0.8 really means 80%. <strong><abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr> and <abbr title="Mean Reciprocal Rank">MRR</abbr></strong> score ranked lists. Offline metrics are proxies, so confirm with an <strong>A/B test</strong> sized in advance and analysed without peeking.</p>
+</div>
+<div class="admonition evolution">
+<p class="admonition-title">Where this fits</p>
+<p><strong>Before:</strong> <a href="../ml-fundamentals/">ML Fundamentals</a> defines generalization and validation. <strong>Next:</strong> every model page uses these metrics; <a href="../../ai-engineering/evaluation/">Evaluating <abbr title="Large Language Model">LLM</abbr> Systems</a> extends them to open-ended text.</p>
+</div>
+<h2 id="classification-metrics">Classification metrics<a class="headerlink" href="#classification-metrics" title="Permanent link">&para;</a></h2>
+<h3 id="the-confusion-matrix">The confusion matrix<a class="headerlink" href="#the-confusion-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Predicted positive</th>
+<th>Predicted negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actually positive</strong></td>
+<td>True positive (TP)</td>
+<td>False negative (FN)</td>
+</tr>
+<tr>
+<td><strong>Actually negative</strong></td>
+<td>False positive (FP)</td>
+<td>True negative (TN)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Accuracy</strong></td>
+<td><span class="arithmatex">\(\frac{TP + TN}{\text{all}}\)</span></td>
+<td>How often am I right? Misleading under imbalance.</td>
+</tr>
+<tr>
+<td><strong>Precision</strong></td>
+<td><span class="arithmatex">\(\frac{TP}{TP + FP}\)</span></td>
+<td>Of everything I flagged, how much was right?</td>
+</tr>
+<tr>
+<td><strong>Recall</strong> (sensitivity, TPR)</td>
+<td><span class="arithmatex">\(\frac{TP}{TP + FN}\)</span></td>
+<td>Of all real positives, how many did I find?</td>
+</tr>
+<tr>
+<td><strong>Specificity</strong> (TNR)</td>
+<td><span class="arithmatex">\(\frac{TN}{TN + FP}\)</span></td>
+<td>Of all real negatives, how many did I clear?</td>
+</tr>
+<tr>
+<td><strong>False positive rate</strong></td>
+<td><span class="arithmatex">\(\frac{FP}{FP + TN}\)</span></td>
+<td>How often do I raise a false alarm on negatives?</td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td><span class="arithmatex">\(\frac{2PR}{P + R}\)</span></td>
+<td>A single number balancing precision and recall</td>
+</tr>
+<tr>
+<td><strong>Fβ</strong></td>
+<td><span class="arithmatex">\(\frac{(1+\beta^2)PR}{\beta^2 P + R}\)</span></td>
+<td>β &gt; 1 weights recall more; β &lt; 1 weights precision more</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why the harmonic mean in F1?</strong> It's dominated by the smaller of the two, so a model can't score well by maximizing one and ignoring the other. Precision 1.0 with recall 0.01 gives an arithmetic mean of about 0.5 but an F1 of about 0.02.</p>
+<h3 id="choosing-by-the-cost-of-mistakes">Choosing by the cost of mistakes<a class="headerlink" href="#choosing-by-the-cost-of-mistakes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Costlier mistake</th>
+<th>Optimize</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cancer screening</td>
+<td>Missing a case (FN)</td>
+<td>Recall, at an acceptable precision</td>
+</tr>
+<tr>
+<td>Spam filter</td>
+<td>Hiding a real email (FP)</td>
+<td>Precision</td>
+</tr>
+<tr>
+<td>Fraud with a review team</td>
+<td>Both, with review capacity fixed</td>
+<td>Recall at a fixed false-positive rate or at top-k</td>
+</tr>
+<tr>
+<td>Search results</td>
+<td>Irrelevant results at the top</td>
+<td>Precision@k, <abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr></td>
+</tr>
+<tr>
+<td>Content moderation</td>
+<td>Depends on policy severity</td>
+<td>Per-policy precision and recall targets</td>
+</tr>
+</tbody>
+</table>
+<h3 id="multiclass-and-multilabel-averaging">Multiclass and multilabel averaging<a class="headerlink" href="#multiclass-and-multilabel-averaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Macro:</strong> compute the metric per class, then average. Every class counts equally, so rare classes matter.</li>
+<li><strong>Micro:</strong> pool all TP, FP and FN, then compute. Every example counts equally; dominated by frequent classes. For single-label multiclass, micro-F1 equals accuracy.</li>
+<li><strong>Weighted:</strong> per-class metric weighted by class frequency.</li>
+</ul>
+<h2 id="threshold-free-metrics-roc-and-pr-curves">Threshold-free metrics: ROC and PR curves<a class="headerlink" href="#threshold-free-metrics-roc-and-pr-curves" title="Permanent link">&para;</a></h2>
+<p>A classifier outputs scores; the threshold turns them into decisions. Curves show performance across all thresholds.</p>
+<ul>
+<li><strong>ROC curve:</strong> true positive rate against false positive rate. <strong>ROC-<abbr title="Area Under the Curve">AUC</abbr></strong> is the probability that a randomly chosen positive is scored above a randomly chosen negative. 0.5 is random; 1.0 is a perfect ranking.</li>
+<li><strong>PR curve:</strong> precision against recall. <strong>Average precision (PR-<abbr title="Area Under the Curve">AUC</abbr>)</strong> summarizes it. Its random baseline is the positive rate, not 0.5.</li>
+</ul>
+<p>Because the false positive rate divides by the (huge) number of negatives, ROC curves barely react to false positives when negatives dominate. Precision divides by what you flagged, so it shows them directly.</p>
+<p><img alt="ROC curve with AUC 0.91 next to a precision–recall curve with average precision 0.23 for the same simulated model with 1% positives" loading="lazy" src="../../assets/img/roc-pr.svg#only-light" />
+<img alt="ROC curve with AUC 0.91 next to a precision–recall curve with average precision 0.23 for the same simulated model with 1% positives" loading="lazy" src="../../assets/img/roc-pr-dark.svg#only-dark" /></p>
+<p>The same model looks strong on ROC (<abbr title="Area Under the Curve">AUC</abbr> 0.91) and weak on PR (AP 0.23): at 50% recall, only about one in seven flagged cases is real. <strong>For rare positives, report PR-<abbr title="Area Under the Curve">AUC</abbr> or precision at a fixed recall.</strong></p>
+<h2 id="probability-quality-and-calibration">Probability quality and calibration<a class="headerlink" href="#probability-quality-and-calibration" title="Permanent link">&para;</a></h2>
+<p>Many decisions use the probability itself: bidding on ads, pricing risk, triaging cases, or combining models.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Log loss</strong></td>
+<td><span class="arithmatex">\(-\frac{1}{n}\sum [y\log p + (1-y)\log(1-p)]\)</span></td>
+<td>Heavily punishes confident mistakes</td>
+</tr>
+<tr>
+<td><strong>Brier score</strong></td>
+<td><span class="arithmatex">\(\frac{1}{n}\sum (p - y)^2\)</span></td>
+<td>Mean squared error of probabilities; bounded</td>
+</tr>
+<tr>
+<td><strong>Expected calibration error</strong></td>
+<td><span class="arithmatex">\(\sum_b \frac{n_b}{N}\lvert \text{acc}_b - \text{conf}_b \rvert\)</span></td>
+<td>Bin predictions; compare average confidence to observed frequency</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>reliability diagram</strong> plots observed frequency against predicted probability per bin; a calibrated model sits on the diagonal.</p>
+<p>How to fix miscalibration, using a held-out calibration set:</p>
+<ul>
+<li><strong>Platt scaling:</strong> fit a logistic regression on the model's scores. Good for small data and sigmoid-shaped distortions.</li>
+<li><strong>Isotonic regression:</strong> a monotonic step function. More flexible; needs more data; can overfit.</li>
+<li><strong>Temperature scaling:</strong> divide neural network logits by one learned temperature <span class="arithmatex">\(T\)</span>. The standard fix for over-confident deep networks; it doesn't change accuracy, only confidence.</li>
+</ul>
+<p>What breaks calibration: resampling or class weights, boosting (pushes scores toward the extremes), over-parameterized deep networks (over-confident), and distribution shift.</p>
+<h2 id="regression-metrics">Regression metrics<a class="headerlink" href="#regression-metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Choose when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><abbr title="Mean Absolute Error">MAE</abbr></strong></td>
+<td><span class="arithmatex">\(\frac{1}{n}\sum \lvert y - \hat y\rvert\)</span></td>
+<td>Errors cost linearly; robust to outliers. The best constant prediction is the median.</td>
+</tr>
+<tr>
+<td><strong><abbr title="Mean Squared Error">MSE</abbr> / <abbr title="Root Mean Squared Error">RMSE</abbr></strong></td>
+<td><span class="arithmatex">\(\frac{1}{n}\sum (y - \hat y)^2\)</span>, and its root</td>
+<td>Large errors are disproportionately bad. The best constant is the mean. <abbr title="Root Mean Squared Error">RMSE</abbr> is in the target's units.</td>
+</tr>
+<tr>
+<td><strong>MAPE</strong></td>
+<td><span class="arithmatex">\(\frac{100}{n}\sum \left\lvert \frac{y - \hat y}{y} \right\rvert\)</span></td>
+<td>Scale-free comparisons; undefined at zero and biased toward under-prediction</td>
+</tr>
+<tr>
+<td><strong>sMAPE / WAPE</strong></td>
+<td>Symmetric or weighted variants</td>
+<td>Forecasting with small values</td>
+</tr>
+<tr>
+<td><strong>R²</strong></td>
+<td><span class="arithmatex">\(1 - \frac{SS_{res}}{SS_{tot}}\)</span></td>
+<td>Share of variance explained vs predicting the mean. Negative means worse than the mean.</td>
+</tr>
+<tr>
+<td><strong>Huber loss</strong></td>
+<td>Quadratic near zero, linear beyond δ</td>
+<td>Training with outliers</td>
+</tr>
+<tr>
+<td><strong>Quantile (pinball) loss</strong></td>
+<td>Asymmetric absolute error</td>
+<td>Prediction intervals, such as P90 demand forecasts</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ranking-and-retrieval-metrics">Ranking and retrieval metrics<a class="headerlink" href="#ranking-and-retrieval-metrics" title="Permanent link">&para;</a></h2>
+<p>Search, recommendations and <abbr title="Retrieval-Augmented Generation">RAG</abbr> retrievers return ordered lists, and people mostly see the top.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Precision@k</strong></td>
+<td>Relevant items in the top <span class="arithmatex">\(k\)</span>, divided by <span class="arithmatex">\(k\)</span></td>
+<td>"How clean is the first page?"</td>
+</tr>
+<tr>
+<td><strong>Recall@k</strong></td>
+<td>Relevant items in the top <span class="arithmatex">\(k\)</span>, divided by all relevant items</td>
+<td><abbr title="Retrieval-Augmented Generation">RAG</abbr> retrievers: did we fetch the evidence?</td>
+</tr>
+<tr>
+<td><strong>Hit rate@k</strong></td>
+<td>Share of queries with at least one relevant item in the top <span class="arithmatex">\(k\)</span></td>
+<td>Simple retrieval health check</td>
+</tr>
+<tr>
+<td><strong><abbr title="Mean Reciprocal Rank">MRR</abbr></strong></td>
+<td>Mean of <span class="arithmatex">\(1/\text{rank}\)</span> of the first relevant item</td>
+<td>One right answer matters (QA, navigation)</td>
+</tr>
+<tr>
+<td><strong>MAP</strong></td>
+<td>Mean over queries of average precision</td>
+<td>Several relevant items, binary relevance</td>
+</tr>
+<tr>
+<td><strong><abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr>@k</strong></td>
+<td>DCG divided by the ideal DCG</td>
+<td>Graded relevance; position-discounted</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\text{DCG@}k = \sum_{i=1}^{k} \frac{rel_i}{\log_2(i+1)} \qquad \text{NDCG@}k = \frac{\text{DCG@}k}{\text{IDCG@}k}
+\]</div>
+<details class="example">
+<summary>Worked example: <abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr> and <abbr title="Mean Reciprocal Rank">MRR</abbr></summary>
+<p>A ranker returns four documents with graded relevance <span class="arithmatex">\([3, 2, 0, 1]\)</span>.</p>
+<p><span class="arithmatex">\(\text{DCG} = \frac{3}{\log_2 2} + \frac{2}{\log_2 3} + \frac{0}{\log_2 4} + \frac{1}{\log_2 5} = 3 + 1.262 + 0 + 0.431 = 4.693\)</span>.</p>
+<p>The ideal order <span class="arithmatex">\([3, 2, 1, 0]\)</span> gives <span class="arithmatex">\(\text{IDCG} = 3 + 1.262 + 0.5 + 0 = 4.762\)</span>, so <span class="arithmatex">\(\text{NDCG} = 4.693 / 4.762 \approx 0.985\)</span>.</p>
+<p>Some systems use gain <span class="arithmatex">\(2^{rel} - 1\)</span> instead of <span class="arithmatex">\(rel\)</span> to reward highly relevant items more; say which you use.</p>
+<p><strong><abbr title="Mean Reciprocal Rank">MRR</abbr>:</strong> if the first relevant result appears at ranks 1, 3 and 2 for three queries, <span class="arithmatex">\(\text{MRR} = (1 + \tfrac13 + \tfrac12)/3 \approx 0.61\)</span>.</p>
+</details>
+<p>Online ranking metrics: click-through rate, dwell time, conversions, successful sessions (no immediate re-query), and long-term retention.</p>
+<h2 id="text-generation-metrics-briefly">Text generation metrics, briefly<a class="headerlink" href="#text-generation-metrics-briefly" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Measures</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BLEU</strong></td>
+<td>n-gram precision vs reference (translation)</td>
+<td>Penalizes valid paraphrases</td>
+</tr>
+<tr>
+<td><strong>ROUGE</strong></td>
+<td>n-gram recall vs reference (summarization)</td>
+<td>Rewards copying; ignores factuality</td>
+</tr>
+<tr>
+<td><strong>BERTScore</strong></td>
+<td>Embedding similarity of tokens</td>
+<td>Better on paraphrase; still reference-bound</td>
+</tr>
+<tr>
+<td><strong>Perplexity</strong></td>
+<td>How well a language model predicts held-out text</td>
+<td>Says little about usefulness or truth</td>
+</tr>
+</tbody>
+</table>
+<p>For open-ended <abbr title="Large Language Model">LLM</abbr> outputs these are weak proxies. Modern practice uses task-specific checks, <abbr title="Large Language Model">LLM</abbr>-as-judge and human review; see <a href="../../ai-engineering/evaluation/">Evaluating <abbr title="Large Language Model">LLM</abbr> Systems</a>.</p>
+<h2 id="online-evaluation-and-ab-testing">Online evaluation and A/B testing<a class="headerlink" href="#online-evaluation-and-ab-testing" title="Permanent link">&para;</a></h2>
+<p>Offline metrics are proxies. An A/B test measures causal impact by randomly splitting units (usually users) between control and treatment.</p>
+<h3 id="design">Design<a class="headerlink" href="#design" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Hypothesis and primary metric:</strong> for example "the new ranker increases successful-session rate."</li>
+<li><strong>Guardrail metrics:</strong> latency, error rate, revenue, unsubscribes. Things that must not get worse.</li>
+<li><strong>Unit of randomization:</strong> user, session, request, or region. Randomize at the level where users interact, or effects leak between groups.</li>
+<li><strong>Sample size</strong>, from the baseline rate, the minimum detectable effect (MDE), significance level α and power:</li>
+</ol>
+<div class="arithmatex">\[
+n_{\text{per group}} \approx \frac{2\,(z_{1-\alpha/2} + z_{1-\beta})^2\, p(1-p)}{\delta^2} \approx \frac{16\, p(1-p)}{\delta^2} \quad (\alpha = 0.05,\ \text{power } 0.8)
+\]</div>
+<details class="example">
+<summary>Worked example: how many users?</summary>
+<p>Baseline conversion is 5%, and you want to detect an absolute lift of 0.5 percentage points. <span class="arithmatex">\(p(1-p) = 0.0475\)</span> and <span class="arithmatex">\(\delta = 0.005\)</span>, so <span class="arithmatex">\(n \approx 16 \times 0.0475 / 0.000025 \approx 30{,}400\)</span> users <strong>per group</strong>. Halving the detectable effect quadruples the sample size.</p>
+</details>
+<h3 id="running-and-analysing">Running and analysing<a class="headerlink" href="#running-and-analysing" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Don't peek and stop early</strong> when the p-value dips below 0.05; repeated looks inflate false positives. Fix the duration in advance (whole weeks, to cover weekly cycles), or use sequential testing methods designed for continuous monitoring.</li>
+<li><strong>Check sample ratio mismatch (SRM):</strong> if a 50/50 split arrives as 50.8/49.2 with millions of users, randomization or logging is broken; don't trust the result.</li>
+<li><strong>Analyse</strong> with a two-proportion z-test or a t-test, and report the effect size with a confidence interval, not only a p-value.</li>
+<li><strong>Variance reduction (CUPED):</strong> adjust the metric using each user's pre-experiment behavior. It can cut the required sample size substantially.</li>
+</ul>
+<h3 id="pitfalls">Pitfalls<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pitfall</th>
+<th>What happens</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Novelty or primacy effects</strong></td>
+<td>Users react to change itself, then revert</td>
+<td>Run longer; analyse by days since exposure</td>
+</tr>
+<tr>
+<td><strong>Network effects / interference</strong></td>
+<td>Treatment users affect control users (marketplaces, social)</td>
+<td>Cluster or geo randomization, switchback tests</td>
+</tr>
+<tr>
+<td><strong>Multiple comparisons</strong></td>
+<td>Many metrics or variants produce false wins</td>
+<td>Pre-register a primary metric; correct (Bonferroni, false discovery rate)</td>
+</tr>
+<tr>
+<td><strong>Simpson's paradox</strong></td>
+<td>The overall result reverses within segments</td>
+<td>Check segment-level results; stratify</td>
+</tr>
+<tr>
+<td><strong>Metric mismatch</strong></td>
+<td>A proxy improves while the goal doesn't</td>
+<td>Long-term holdouts; validate the proxy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alternatives">Alternatives<a class="headerlink" href="#alternatives" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Interleaving</strong> (for rankers): merge results from two rankers into one list and see which one's items get clicked. Needs far fewer users than an A/B test.</li>
+<li><strong>Multi-armed bandits:</strong> shift traffic toward the winner during the test. Less regret, weaker inference.</li>
+<li><strong>Shadow deployment:</strong> run the new model on live traffic without acting on it, to check latency, errors and prediction drift before any user sees it.</li>
+</ul>
+<h2 id="why-offline-and-online-results-disagree">Why offline and online results disagree<a class="headerlink" href="#why-offline-and-online-results-disagree" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The offline metric isn't aligned with the business goal (higher <abbr title="Area Under the Curve">AUC</abbr>, same revenue).</li>
+<li><strong>Leakage</strong> inflated offline scores.</li>
+<li><strong>Training–serving skew:</strong> features computed differently in production.</li>
+<li><strong>Feedback loops:</strong> offline data was logged under the old model's choices (position bias, selection bias).</li>
+<li><strong>Distribution shift</strong> between the evaluation period and now.</li>
+<li><strong>The experiment is broken</strong> (SRM, interference, too little power).</li>
+</ul>
+<h2 id="interview-questions">Interview questions<a class="headerlink" href="#interview-questions" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>Precision vs recall: give a case where each matters more.</summary>
+<p><strong>Recall</strong> matters when missing a positive is expensive: cancer screening, fraud before a large transfer, safety-critical defects. <strong>Precision</strong> matters when false alarms are expensive or erode trust: spam filtering (losing a real email), auto-blocking accounts, notifications. Most real systems set a constraint on one and optimize the other, for example maximize recall subject to precision ≥ 90%, or maximize recall at the number of cases a review team can handle per day.</p>
+</details>
+<details class="question">
+<summary>What does ROC-<abbr title="Area Under the Curve">AUC</abbr> mean intuitively? When is it misleading?</summary>
+<p>It's the probability that a randomly chosen positive gets a higher score than a randomly chosen negative, so it measures ranking quality across all thresholds. It's misleading under <strong>heavy class imbalance</strong>: with 1,000,000 negatives, 10,000 false positives is only a 1% false-positive rate, so ROC looks great while precision is poor. It also ignores calibration and the operating point you'll actually use. Use PR-<abbr title="Area Under the Curve">AUC</abbr> or precision/recall at the chosen threshold for rare positives.</p>
+</details>
+<details class="question">
+<summary>ROC-<abbr title="Area Under the Curve">AUC</abbr> or PR-<abbr title="Area Under the Curve">AUC</abbr> for fraud detection, and why?</summary>
+<p>PR-<abbr title="Area Under the Curve">AUC</abbr> (average precision), plus recall at a fixed false-positive rate or at the review team's capacity. Fraud is rare, so ROC's false-positive rate is diluted by the huge number of legitimate transactions, while precision directly shows how many flagged cases are real. The PR baseline equals the fraud rate, which makes improvements easy to interpret. Report both if stakeholders are used to ROC-<abbr title="Area Under the Curve">AUC</abbr>, but decide with PR-based metrics.</p>
+</details>
+<details class="question">
+<summary>Why is F1 a harmonic mean rather than an arithmetic mean?</summary>
+<p>The harmonic mean is pulled toward the smaller value, so F1 is only high when both precision and recall are high. With precision 1.0 and recall 0.02, the arithmetic mean is 0.51 but F1 is about 0.04, which better reflects a useless model. If the two errors have different costs, use Fβ or a cost-weighted metric instead.</p>
+</details>
+<details class="question">
+<summary>Macro vs micro averaging: when does each matter?</summary>
+<p>Macro-averaging computes the metric per class and averages, so every class counts equally; use it when rare classes matter (rare diseases, minority intents). Micro-averaging pools all decisions, so frequent classes dominate; for single-label multiclass it equals accuracy. Report macro when you care about performance on every class, micro when you care about overall throughput, and per-class numbers when stakeholders care about specific classes.</p>
+</details>
+<details class="question">
+<summary>What is calibration and how do you fix a miscalibrated model?</summary>
+<p>A model is calibrated if, among cases where it predicts 0.8, about 80% are positive. Check with a reliability diagram, expected calibration error or Brier score. Fix it on a held-out calibration set with <strong>Platt scaling</strong> (logistic regression on scores), <strong>isotonic regression</strong> (monotonic, needs more data), or <strong>temperature scaling</strong> for neural networks (divide logits by a learned <span class="arithmatex">\(T\)</span>, which keeps rankings unchanged). Recalibrate after resampling, after reweighting, and periodically under drift.</p>
+</details>
+<details class="question">
+<summary>When do calibrated probabilities matter more than ranking?</summary>
+<p>When the probability feeds a decision with costs or money: ad bidding (bid = value × predicted click probability), insurance pricing, credit limits, expected-value triage, combining several models' outputs, or showing confidence to users. If you only ever take the top-k, ranking metrics are enough; as soon as the number itself is used, calibration matters.</p>
+</details>
+<details class="question">
+<summary><abbr title="Mean Absolute Error">MAE</abbr> vs <abbr title="Root Mean Squared Error">RMSE</abbr>: when do you use each?</summary>
+<p><abbr title="Root Mean Squared Error">RMSE</abbr> squares errors, so it punishes large errors much more; use it when big misses are disproportionately costly, and note that it's sensitive to outliers. <abbr title="Mean Absolute Error">MAE</abbr> treats errors linearly and is robust to outliers. The best constant predictor is the mean under <abbr title="Mean Squared Error">MSE</abbr> and the median under <abbr title="Mean Absolute Error">MAE</abbr>, which tells you what each metric pushes a model toward. Report both when error distributions are skewed.</p>
+</details>
+<details class="question">
+<summary>How can R² be negative?</summary>
+<p><span class="arithmatex">\(R^2 = 1 - SS_{res}/SS_{tot}\)</span> compares the model with always predicting the mean of the target. On a held-out set, a model that does worse than that constant has <span class="arithmatex">\(SS_{res} &gt; SS_{tot}\)</span>, so R² goes below zero. It signals a badly overfit model, a distribution shift, or a broken pipeline.</p>
+</details>
+<details class="question">
+<summary>Explain <abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr>.</summary>
+<p>It scores a ranked list with graded relevance, discounting relevance by position: <span class="arithmatex">\(\text{DCG@}k = \sum_i rel_i / \log_2(i+1)\)</span>, then divides by the DCG of the ideal ordering so scores lie between 0 and 1 and are comparable across queries. It rewards putting the most relevant items first, handles multiple relevance levels, and is the standard offline metric for search and recommendation ranking. Mention the variant with gain <span class="arithmatex">\(2^{rel}-1\)</span>.</p>
+</details>
+<details class="question">
+<summary><abbr title="Mean Reciprocal Rank">MRR</abbr> vs MAP vs <abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr>: which would you use when?</summary>
+<p><strong><abbr title="Mean Reciprocal Rank">MRR</abbr></strong> when only the first relevant result matters (question answering, navigational search). <strong>MAP</strong> when there are several relevant items with binary relevance and you care about all of them. <strong><abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr></strong> when relevance is graded (perfect, good, fair) and position matters. For <abbr title="Retrieval-Augmented Generation">RAG</abbr> retrievers, recall@k is often the first metric to check, because the generator can only use what was retrieved.</p>
+</details>
+<details class="question">
+<summary>How do you decide the sample size and duration of an A/B test?</summary>
+<p>From the baseline rate (or variance), the minimum detectable effect worth acting on, the significance level (usually 5%) and power (usually 80%): roughly <span class="arithmatex">\(n \approx 16\,p(1-p)/\delta^2\)</span> per group for conversion metrics. Divide by daily eligible traffic to get the duration, then round up to whole weeks to cover weekly cycles. Smaller effects need quadratically more users; variance reduction like CUPED reduces it.</p>
+</details>
+<details class="question">
+<summary>What is peeking, and why is it a problem?</summary>
+<p>Checking results repeatedly and stopping as soon as p &lt; 0.05. Each look is another chance for noise to cross the threshold, so the real false-positive rate ends up far above 5%. Fix the sample size and duration in advance, or use methods built for continuous monitoring (sequential tests, always-valid p-values), and decide stopping rules before the test.</p>
+</details>
+<details class="question">
+<summary>What is sample ratio mismatch?</summary>
+<p>When the observed split between groups differs significantly from the designed split, for example 50.6% vs 49.4% with millions of users. It means randomization, eligibility or logging is broken (bots filtered in one arm, a crash in the treatment, a redirect dropping users), so the result can't be trusted. Check it with a chi-square test before reading any metric.</p>
+</details>
+<details class="question">
+<summary>Your offline metric improved but the online metric dropped. Why might that happen?</summary>
+<p>The offline metric may not reflect the goal (higher <abbr title="Area Under the Curve">AUC</abbr> on clicks, but fewer purchases). Offline evaluation may be biased by logged data from the old model (position bias) or by leakage. Features may differ in production (training–serving skew). The new model may be slower, and latency costs engagement. Users may react to change itself (novelty). Or the test is underpowered or broken (SRM). Investigate segment by segment and replay production data offline.</p>
+</details>
+<details class="question">
+<summary>A/B test vs multi-armed bandit: when do you use each?</summary>
+<p>A/B tests give clean causal estimates with confidence intervals; use them for launch decisions and when you need to understand effects, including on guardrails. Bandits shift traffic toward better variants during the experiment, reducing the cost of showing a bad variant; use them for short-lived choices with many options (headlines, creatives, recommendations) where maximizing reward during the test matters more than precise inference.</p>
+</details>
+<details class="question">
+<summary>What's interleaving and why is it efficient for ranking?</summary>
+<p>You merge the results of two rankers into one list (for example team-draft interleaving) shown to the same user, then credit each ranker for the clicks its items receive. Because each user compares both rankers directly, between-user variance disappears, so interleaving detects ranking differences with far fewer users than an A/B test. It measures preference between rankers, not absolute business metrics, so teams typically interleave to screen candidates and A/B test the winner.</p>
+</details>
+<div class="admonition pitfall">
+<p class="admonition-title">Common mistakes</p>
+<ul>
+<li>Accuracy on imbalanced data.</li>
+<li>Comparing PR-<abbr title="Area Under the Curve">AUC</abbr> across datasets with different base rates.</li>
+<li>Reporting a p-value without the effect size and confidence interval.</li>
+<li>Stopping a test the day it turns significant.</li>
+<li>Randomizing by request when users see both variants.</li>
+<li>Forgetting guardrail metrics like latency.</li>
+</ul>
+</div>
+<h2 id="revision-checklist">Revision checklist<a class="headerlink" href="#revision-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Write precision, recall, F1 and FPR from the confusion matrix</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain the probabilistic meaning of ROC-<abbr title="Area Under the Curve">AUC</abbr> and why PR is better for rare positives</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Describe Platt scaling, isotonic regression and temperature scaling</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Compute <abbr title="Normalized Discounted Cumulative Gain">NDCG</abbr> and <abbr title="Mean Reciprocal Rank">MRR</abbr> for a small example</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Size an A/B test with the 16·p(1−p)/δ² rule</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> List five reasons offline and online results disagree</li>
+</ul>
+<h2 id="go-deeper">Go deeper<a class="headerlink" href="#go-deeper" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">scikit-learn: metrics and scoring</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn: probability calibration</a></li>
+<li>Kohavi, Tang and Xu, <em>Trustworthy Online Controlled Experiments</em> (Cambridge University Press, 2020)</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../ml-fundamentals/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ML Fundamentals">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                ML Fundamentals
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../classical-ml/linear-models/" class="md-footer__link md-footer__link--next" aria-label="Next: Linear &amp; Logistic Regression">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Linear & Logistic Regression
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Built for interview preparation. Corrections welcome through GitHub issues and pull requests.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rajan-021/AI-ML" target="_blank" rel="noopener" title="Source on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.action.edit", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../assets/js/katex-init.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../../assets/js/app.js"></script>
+      
+    
+  </body>
+</html>

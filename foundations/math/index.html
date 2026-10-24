@@ -1,0 +1,3594 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The linear algebra, probability, statistics, calculus and information theory that ML interviews actually test, with the derivations you should be able to do on a whiteboard.">
+      
+      
+        <meta name="author" content="rajan-021">
+      
+      
+        <link rel="canonical" href="https://rajan-021.github.io/AI-ML/foundations/math/">
+      
+      
+        <link rel="prev" href="../../start/interview-playbook/">
+      
+      
+        <link rel="next" href="../ml-fundamentals/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Math for ML - AI/ML Interview Map</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%203C6.5%203%202%206.6%202%2011c0%202.2%201.1%204.2%202.8%205.5%200%20.6-.4%202.2-2.8%204.5%202.4-.1%204.6-1%206.5-2.5%201.1.3%202.3.5%203.5.5%205.5%200%2010-3.6%2010-8s-4.5-8-10-8m0%2014c-4.4%200-8-2.7-8-6s3.6-6%208-6%208%202.7%208%206-3.6%206-8%206m.2-10.5c-.9%200-1.6.2-2.1.5-.6.4-.9%201-.8%201.7h2q0-.45.3-.6c.2-.1.4-.2.7-.2s.6.1.8.3.3.4.3.7-.1.5-.2.7c-.2.2-.4.4-.6.5-.5.3-.9.6-1.1.8-.4.3-.5.6-.5%201.1h2c0-.3.1-.5.1-.7.1-.2.3-.3.5-.5.5-.2.8-.5%201.1-.9s.4-.8.4-1.2c0-.7-.3-1.3-.8-1.7-.4-.3-1.2-.5-2.1-.5M11%2013v2h2v-2z%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#math-for-ml" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            
+            
+  New here? Read <a href="../../start/how-to-use/">How to Use This Site</a> first, then test yourself with the <a href="../../practice/flashcards/">Flashcard Drill</a>.
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI/ML Interview Map" class="md-header__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI/ML Interview Map
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Math for ML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../classical-ml/linear-models/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Classical ML
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deep-learning/neural-networks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../llms/transformer/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Transformers & LLMs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../alignment/rl-essentials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Alignment & Reasoning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ai-engineering/prompting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../production/mlops/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Production
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../practice/ml-coding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Practice
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI/ML Interview Map" class="md-nav__button md-logo" aria-label="AI/ML Interview Map" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg>
+
+    </a>
+    AI/ML Interview Map
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rajan-021/AI-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    rajan-021/AI-ML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use This Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/big-picture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Big Picture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/study-plans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Study Plans by Week and Role
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/interview-playbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Playbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math for ML
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math for ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectors-dot-products-and-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectors, dot products and similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrices-as-transformations-and-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrices as transformations, and shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-eigenvectors-and-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank, eigenvectors and SVD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#norms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Norms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Probability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-distributions-that-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The distributions that matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bayes' theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expectation-variance-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expectation, variance, covariance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-and-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maximum likelihood and MAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistics-for-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistics for experiments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculus-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calculus and optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calculus and optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gradients-and-the-chain-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradients and the chain rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient descent variants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constrained-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constrained optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information theory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation & Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classical ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classical ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/linear-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear & Logistic Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/knn-nb-svm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    kNN, Naive Bayes & SVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/trees-ensembles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees & Ensembles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/unsupervised/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classical-ml/recommender-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recommender Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Network Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Deep Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/cnn-vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNNs & Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep-learning/sequence-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence Models (RNN to Attention)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformers & LLMs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformers & LLMs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/efficient-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Efficient Attention & MoE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/pretraining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pretraining & LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/fine-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-Tuning & Efficiency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference & Serving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llms/generative-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alignment & Reasoning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alignment & Reasoning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/rl-essentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RL Essentials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/post-training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Training & Alignment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../alignment/reasoning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reasoning Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prompt Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embeddings & Vector Search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP & A2A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/context-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/harness-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating LLM Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai-engineering/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guardrails & Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Production
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/mlops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLOps & LLMOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/ml-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/genai-system-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../production/responsible-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responsible AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Practice
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Practice
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/ml-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML Coding from Scratch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/top-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Most-Asked Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/flashcards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flashcard Drill
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../practice/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linear-algebra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear algebra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linear algebra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectors-dot-products-and-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectors, dot products and similarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrices-as-transformations-and-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrices as transformations, and shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-eigenvectors-and-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank, eigenvectors and SVD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#norms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Norms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Probability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-distributions-that-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The distributions that matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bayes' theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expectation-variance-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expectation, variance, covariance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-and-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maximum likelihood and MAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statistics-for-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistics for experiments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculus-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calculus and optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Calculus and optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gradients-and-the-chain-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradients and the chain rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient descent variants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constrained-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constrained optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information theory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interview-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interview questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-deeper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go deeper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:applied-scientist" class="md-tag">Applied Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:data-scientist" class="md-tag">Data Scientist</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../tags/#tag:ml-engineer" class="md-tag">ML Engineer</a>
+      
+    
+  </nav>
+
+
+  
+    <a href="https://github.com/rajan-021/AI-ML/edit/main/docs/foundations/math.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="math-for-ml">Math for ML<a class="headerlink" href="#math-for-ml" title="Permanent link">&para;</a></h1><div class="study-bar" data-page="foundations/math/" data-minutes="16" data-questions="13" data-act="0" data-priority="High"></div>
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<p>Four tools appear everywhere later on. <strong>Linear algebra:</strong> models are matrix multiplications; dot products measure similarity; <abbr title="Singular Value Decomposition">SVD</abbr> and low rank explain <abbr title="Principal Component Analysis">PCA</abbr> and <abbr title="Low-Rank Adaptation">LoRA</abbr>. <strong>Probability:</strong> training is usually maximum likelihood; priors are regularizers. <strong>Calculus:</strong> gradient descent and the chain rule (backprop). <strong>Information theory:</strong> cross-entropy is the classification and <abbr title="Large Language Model">LLM</abbr> loss; <abbr title="Kullback–Leibler divergence">KL</abbr> divergence measures how far two distributions are apart. You need intuition and a handful of derivations, not proofs.</p>
+</div>
+<div class="admonition evolution">
+<p class="admonition-title">Where this fits</p>
+<p><strong>Before:</strong> nothing; this is the toolkit. <strong>Next:</strong> <a href="../ml-fundamentals/">ML Fundamentals</a> uses these tools to define learning, generalization and regularization.</p>
+</div>
+<h2 id="linear-algebra">Linear algebra<a class="headerlink" href="#linear-algebra" title="Permanent link">&para;</a></h2>
+<h3 id="vectors-dot-products-and-similarity">Vectors, dot products and similarity<a class="headerlink" href="#vectors-dot-products-and-similarity" title="Permanent link">&para;</a></h3>
+<p>A data point, a word, an image patch or a user is a <strong>vector</strong>. The dot product measures alignment:</p>
+<div class="arithmatex">\[
+a \cdot b = \sum_i a_i b_i = \|a\|\,\|b\|\cos\theta
+\]</div>
+<ul>
+<li><strong>Cosine similarity</strong> <span class="arithmatex">\(\frac{a \cdot b}{\|a\|\|b\|}\)</span> ignores length and compares direction. It's the standard for comparing embeddings, because an embedding's length often reflects frequency or confidence rather than meaning.</li>
+<li>If vectors are normalized to length 1, cosine similarity equals the dot product, and ranking by either gives the same order. That's why vector databases often normalize first.</li>
+<li>Attention scores are dot products between a query and keys: <span class="arithmatex">\(QK^\top\)</span>.</li>
+</ul>
+<h3 id="matrices-as-transformations-and-shapes">Matrices as transformations, and shapes<a class="headerlink" href="#matrices-as-transformations-and-shapes" title="Permanent link">&para;</a></h3>
+<p>A matrix <span class="arithmatex">\(W\)</span> of shape <span class="arithmatex">\((m, n)\)</span> maps an <span class="arithmatex">\(n\)</span>-dimensional vector to an <span class="arithmatex">\(m\)</span>-dimensional one: rotate, scale, project. A neural network layer is <span class="arithmatex">\(h = \sigma(Wx + b)\)</span>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Shapes are half of every ML coding round</p>
+<p><span class="arithmatex">\(X\)</span> is usually <span class="arithmatex">\((n, d)\)</span>: <span class="arithmatex">\(n\)</span> samples, <span class="arithmatex">\(d\)</span> features. Weights <span class="arithmatex">\(w\)</span> are <span class="arithmatex">\((d,)\)</span> for one output or <span class="arithmatex">\((d, k)\)</span> for <span class="arithmatex">\(k\)</span> outputs. <span class="arithmatex">\(XW\)</span> has shape <span class="arithmatex">\((n, k)\)</span>. Say shapes out loud while you code; most bugs are shape bugs.</p>
+</div>
+<p>Useful identities:</p>
+<table>
+<thead>
+<tr>
+<th>Identity</th>
+<th>Where it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\((AB)^\top = B^\top A^\top\)</span></td>
+<td>Deriving gradients, normal equation</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\nabla_w \|Xw - y\|^2 = 2X^\top(Xw - y)\)</span></td>
+<td>Linear regression gradient</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\nabla_x\, x^\top A x = (A + A^\top)x\)</span></td>
+<td>Quadratic forms, Gaussian log-likelihood</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{tr}(AB) = \operatorname{tr}(BA)\)</span></td>
+<td>Matrix calculus tricks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rank-eigenvectors-and-svd">Rank, eigenvectors and <abbr title="Singular Value Decomposition">SVD</abbr><a class="headerlink" href="#rank-eigenvectors-and-svd" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Rank</strong> is the number of independent directions in a matrix. A rank-<span class="arithmatex">\(r\)</span> matrix of shape <span class="arithmatex">\((d, d)\)</span> can be written as <span class="arithmatex">\(BA\)</span> with <span class="arithmatex">\(B\)</span> of shape <span class="arithmatex">\((d, r)\)</span> and <span class="arithmatex">\(A\)</span> of shape <span class="arithmatex">\((r, d)\)</span>: <span class="arithmatex">\(2dr\)</span> numbers instead of <span class="arithmatex">\(d^2\)</span>. That is the whole idea behind <a href="../../llms/fine-tuning/"><abbr title="Low-Rank Adaptation">LoRA</abbr></a>.</li>
+<li><strong>Eigenvectors</strong> of a square matrix <span class="arithmatex">\(A\)</span> satisfy <span class="arithmatex">\(Av = \lambda v\)</span>: directions that are only stretched, by factor <span class="arithmatex">\(\lambda\)</span>.</li>
+<li>For a <strong>covariance matrix</strong> (symmetric, positive semi-definite), eigenvectors are orthogonal directions of variance and eigenvalues are the variance along each. Those eigenvectors are the principal components in <a href="../../classical-ml/unsupervised/"><abbr title="Principal Component Analysis">PCA</abbr></a>.</li>
+<li><strong><abbr title="Singular Value Decomposition">SVD</abbr></strong> works for any matrix: <span class="arithmatex">\(X = U\Sigma V^\top\)</span>, with orthogonal <span class="arithmatex">\(U\)</span>, <span class="arithmatex">\(V\)</span> and non-negative singular values in <span class="arithmatex">\(\Sigma\)</span>. Keeping the top <span class="arithmatex">\(k\)</span> singular values gives the best rank-<span class="arithmatex">\(k\)</span> approximation (Eckart–Young theorem). Used in <abbr title="Principal Component Analysis">PCA</abbr>, recommender matrix factorization, compression and <abbr title="Low-Rank Adaptation">LoRA</abbr> initialization variants.</li>
+</ul>
+<h3 id="norms">Norms<a class="headerlink" href="#norms" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Norm</th>
+<th>Formula</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td><span class="arithmatex">\(\sum_i \lvert x_i\rvert\)</span></td>
+<td>Lasso regularization (sparsity), <abbr title="Mean Absolute Error">MAE</abbr>, Manhattan distance</td>
+</tr>
+<tr>
+<td>L2</td>
+<td><span class="arithmatex">\(\sqrt{\sum_i x_i^2}\)</span></td>
+<td>Ridge regularization, Euclidean distance, gradient clipping</td>
+</tr>
+<tr>
+<td>L∞</td>
+<td><span class="arithmatex">\(\max_i \lvert x_i\rvert\)</span></td>
+<td>Adversarial robustness bounds</td>
+</tr>
+<tr>
+<td>Frobenius</td>
+<td><span class="arithmatex">\(\sqrt{\sum_{ij} A_{ij}^2}\)</span></td>
+<td>Matrix approximation error, weight decay on matrices</td>
+</tr>
+</tbody>
+</table>
+<h2 id="probability">Probability<a class="headerlink" href="#probability" title="Permanent link">&para;</a></h2>
+<h3 id="the-distributions-that-matter">The distributions that matter<a class="headerlink" href="#the-distributions-that-matter" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th>Models</th>
+<th>Where in ML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bernoulli(<span class="arithmatex">\(p\)</span>)</td>
+<td>One yes/no outcome</td>
+<td>Binary labels → log loss</td>
+</tr>
+<tr>
+<td>Binomial(<span class="arithmatex">\(n, p\)</span>)</td>
+<td>Number of successes in <span class="arithmatex">\(n\)</span> trials</td>
+<td>Conversion counts in A/B tests</td>
+</tr>
+<tr>
+<td>Categorical</td>
+<td>One of <span class="arithmatex">\(k\)</span> classes</td>
+<td>Multiclass labels, next-token prediction → softmax + cross-entropy</td>
+</tr>
+<tr>
+<td>Gaussian(<span class="arithmatex">\(\mu, \sigma^2\)</span>)</td>
+<td>Continuous values with noise</td>
+<td>Regression noise → <abbr title="Mean Squared Error">MSE</abbr>; VAEs; weight initialization</td>
+</tr>
+<tr>
+<td>Poisson(<span class="arithmatex">\(\lambda\)</span>)</td>
+<td>Counts per interval</td>
+<td>Event counts, arrivals, Poisson regression</td>
+</tr>
+<tr>
+<td>Exponential(<span class="arithmatex">\(\lambda\)</span>)</td>
+<td>Waiting times</td>
+<td>Survival and time-to-event models</td>
+</tr>
+<tr>
+<td>Beta(<span class="arithmatex">\(\alpha, \beta\)</span>)</td>
+<td>A probability itself</td>
+<td>Prior for click-through rates; Thompson sampling</td>
+</tr>
+<tr>
+<td>Uniform</td>
+<td>Equal chance</td>
+<td>Random initialization, random search</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bayes-theorem">Bayes' theorem<a class="headerlink" href="#bayes-theorem" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}
+\]</div>
+<details class="example">
+<summary>The classic interview puzzle</summary>
+<p>A test is 99% sensitive (positive when you have the disease) and 99% specific (negative when you don't). The disease affects 1% of people. You test positive. What's the probability you have it?</p>
+<p>Out of 10,000 people: 100 have it, and 99 of them test positive. 9,900 don't, and 1% of them, 99, also test positive. So <span class="arithmatex">\(P(\text{disease} \mid +) = 99 / (99 + 99) = 50\%\)</span>. The low <strong>base rate</strong> drags it down. Same logic explains why a fraud model with a 1% false-positive rate can still produce mostly false alarms when fraud is rare.</p>
+</details>
+<h3 id="expectation-variance-covariance">Expectation, variance, covariance<a class="headerlink" href="#expectation-variance-covariance" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(\mathbb{E}[aX + b] = a\,\mathbb{E}[X] + b\)</span>, and expectation is linear even for dependent variables.</li>
+<li><span class="arithmatex">\(\operatorname{Var}(X) = \mathbb{E}[X^2] - \mathbb{E}[X]^2\)</span>; <span class="arithmatex">\(\operatorname{Var}(aX) = a^2\operatorname{Var}(X)\)</span>.</li>
+<li>For independent variables, <span class="arithmatex">\(\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)\)</span>. Averaging <span class="arithmatex">\(n\)</span> independent estimates divides variance by <span class="arithmatex">\(n\)</span>: the reason bagging and ensembles work.</li>
+<li><strong>Correlation</strong> is covariance scaled to <span class="arithmatex">\([-1, 1]\)</span>. It measures <em>linear</em> association only, and correlation is not causation.</li>
+</ul>
+<h3 id="maximum-likelihood-and-map">Maximum likelihood and MAP<a class="headerlink" href="#maximum-likelihood-and-map" title="Permanent link">&para;</a></h3>
+<p>Most training objectives are <strong>maximum likelihood estimation (<abbr title="Maximum Likelihood Estimation">MLE</abbr>)</strong>: choose parameters <span class="arithmatex">\(\theta\)</span> that make the observed data most probable, <span class="arithmatex">\(\hat\theta = \arg\max_\theta \sum_i \log p(y_i \mid x_i; \theta)\)</span>. Working with the log turns products into sums and avoids underflow.</p>
+<p><strong>MAP</strong> adds a prior: <span class="arithmatex">\(\hat\theta = \arg\max_\theta \left[\sum_i \log p(y_i \mid x_i;\theta) + \log p(\theta)\right]\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Assumption</th>
+<th>What <abbr title="Maximum Likelihood Estimation">MLE</abbr> or MAP becomes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gaussian noise on <span class="arithmatex">\(y\)</span></td>
+<td>Mean squared error</td>
+</tr>
+<tr>
+<td>Bernoulli label</td>
+<td>Binary cross-entropy (log loss)</td>
+</tr>
+<tr>
+<td>Categorical label</td>
+<td>Softmax cross-entropy</td>
+</tr>
+<tr>
+<td>Gaussian prior on weights</td>
+<td>L2 regularization (ridge, weight decay)</td>
+</tr>
+<tr>
+<td>Laplace prior on weights</td>
+<td>L1 regularization (lasso)</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Derivation: <abbr title="Mean Squared Error">MSE</abbr> from Gaussian noise</summary>
+<p>Assume <span class="arithmatex">\(y_i = f(x_i) + \epsilon_i\)</span> with <span class="arithmatex">\(\epsilon_i \sim \mathcal{N}(0, \sigma^2)\)</span>. Then
+<span class="arithmatex">\(\log p(y_i \mid x_i) = -\frac{(y_i - f(x_i))^2}{2\sigma^2} - \frac{1}{2}\log(2\pi\sigma^2)\)</span>.
+Summing over the data and dropping constants, maximizing the log-likelihood equals minimizing <span class="arithmatex">\(\sum_i (y_i - f(x_i))^2\)</span>: the squared error. The same steps with a Bernoulli likelihood <span class="arithmatex">\(p^{y}(1-p)^{1-y}\)</span> give log loss.</p>
+</details>
+<h2 id="statistics-for-experiments">Statistics for experiments<a class="headerlink" href="#statistics-for-experiments" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Null hypothesis</strong></td>
+<td>The default claim, usually "no difference between A and B"</td>
+</tr>
+<tr>
+<td><strong>p-value</strong></td>
+<td>Probability of seeing data at least this extreme <em>if the null were true</em>. Not the probability the null is true.</td>
+</tr>
+<tr>
+<td><strong>Type I error (α)</strong></td>
+<td>False positive: declaring an effect that isn't there. Usually capped at 5%.</td>
+</tr>
+<tr>
+<td><strong>Type II error (β)</strong></td>
+<td>False negative: missing a real effect. <strong>Power</strong> = <span class="arithmatex">\(1 - \beta\)</span>, usually targeted at 80%.</td>
+</tr>
+<tr>
+<td><strong>Confidence interval</strong></td>
+<td>A range built so that 95% of such intervals (over repeated experiments) contain the true value</td>
+</tr>
+<tr>
+<td><strong>Central Limit Theorem</strong></td>
+<td>Means of many independent samples are approximately normal, which justifies z- and t-tests on averages and conversion rates</td>
+</tr>
+<tr>
+<td><strong>Multiple testing</strong></td>
+<td>Testing many metrics or variants inflates false positives; correct with Bonferroni or control the false discovery rate</td>
+</tr>
+</tbody>
+</table>
+<p>Which test: <strong>z-test</strong> for proportions with large samples, <strong>t-test</strong> for means with unknown variance, <strong>chi-square</strong> for categorical counts, <strong>Mann–Whitney</strong> when normality is doubtful. A/B testing in practice is on <a href="../evaluation/">Evaluation &amp; Metrics</a>.</p>
+<h2 id="calculus-and-optimization">Calculus and optimization<a class="headerlink" href="#calculus-and-optimization" title="Permanent link">&para;</a></h2>
+<h3 id="gradients-and-the-chain-rule">Gradients and the chain rule<a class="headerlink" href="#gradients-and-the-chain-rule" title="Permanent link">&para;</a></h3>
+<p>The gradient <span class="arithmatex">\(\nabla_\theta L\)</span> points in the direction of steepest increase, so we step against it:</p>
+<div class="arithmatex">\[
+\theta \leftarrow \theta - \eta\, \nabla_\theta L(\theta)
+\]</div>
+<p>The <strong>chain rule</strong> composes derivatives: if <span class="arithmatex">\(L = f(g(x))\)</span> then <span class="arithmatex">\(\frac{dL}{dx} = f'(g(x))\,g'(x)\)</span>. Backpropagation is the chain rule applied layer by layer from the loss backwards, reusing intermediate results. See <a href="../../deep-learning/neural-networks/">Neural Network Fundamentals</a>.</p>
+<p>Derivatives you should know by heart:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Derivative</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sigmoid <span class="arithmatex">\(\sigma(z) = \frac{1}{1+e^{-z}}\)</span></td>
+<td><span class="arithmatex">\(\sigma(z)(1 - \sigma(z))\)</span></td>
+<td>At most 0.25, so stacked sigmoids shrink gradients</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tanh(z)\)</span></td>
+<td><span class="arithmatex">\(1 - \tanh^2(z)\)</span></td>
+<td>At most 1, still saturates</td>
+</tr>
+<tr>
+<td><abbr title="Rectified Linear Unit">ReLU</abbr> <span class="arithmatex">\(\max(0, z)\)</span></td>
+<td>1 if <span class="arithmatex">\(z &gt; 0\)</span>, else 0</td>
+<td>No saturation for positive inputs</td>
+</tr>
+<tr>
+<td>Softmax + cross-entropy</td>
+<td><span class="arithmatex">\(\frac{\partial L}{\partial z} = p - y\)</span></td>
+<td>The cleanest gradient in ML; same form as logistic regression</td>
+</tr>
+<tr>
+<td><abbr title="Mean Squared Error">MSE</abbr> <span class="arithmatex">\(\frac{1}{2}(\hat y - y)^2\)</span></td>
+<td><span class="arithmatex">\(\hat y - y\)</span></td>
+<td>Linear regression gradient</td>
+</tr>
+</tbody>
+</table>
+<h3 id="convexity">Convexity<a class="headerlink" href="#convexity" title="Permanent link">&para;</a></h3>
+<p>A function is <strong>convex</strong> if every line segment between two points on its graph lies above the graph. Convex losses (linear regression, logistic regression, <abbr title="Support Vector Machine">SVM</abbr>) have a single global minimum, so gradient descent finds it. Neural network losses are <strong>non-convex</strong>, with many minima and saddle points; in high dimensions most critical points are saddle points rather than bad local minima, and <abbr title="Stochastic Gradient Descent">SGD</abbr>'s noise helps escape them.</p>
+<h3 id="gradient-descent-variants">Gradient descent variants<a class="headerlink" href="#gradient-descent-variants" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Gradient computed on</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch</td>
+<td>The whole dataset</td>
+<td>Stable, exact, but one step per full pass</td>
+</tr>
+<tr>
+<td>Stochastic</td>
+<td>One example</td>
+<td>Very noisy, cheap steps, noise can help generalization</td>
+</tr>
+<tr>
+<td>Mini-batch</td>
+<td>32 to thousands of examples</td>
+<td>The practical default; matches GPU parallelism</td>
+</tr>
+</tbody>
+</table>
+<p>Second-order methods (Newton's method) use the Hessian of second derivatives, which costs <span class="arithmatex">\(O(d^2)\)</span> memory and <span class="arithmatex">\(O(d^3)\)</span> to invert, so they're impractical for models with millions of parameters. Adam approximates per-parameter curvature cheaply instead. See <a href="../../deep-learning/training/">Training Deep Networks</a>.</p>
+<h3 id="constrained-optimization">Constrained optimization<a class="headerlink" href="#constrained-optimization" title="Permanent link">&para;</a></h3>
+<p><strong>Lagrange multipliers</strong> turn a constrained problem into an unconstrained one by adding the constraint to the objective with a multiplier. You'll see this in the <abbr title="Support Vector Machine">SVM</abbr> dual form, where only points with non-zero multipliers (the support vectors) affect the solution.</p>
+<h2 id="information-theory">Information theory<a class="headerlink" href="#information-theory" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Formula</th>
+<th>Intuition and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Entropy</strong></td>
+<td><span class="arithmatex">\(H(p) = -\sum_x p(x)\log p(x)\)</span></td>
+<td>Average surprise; uncertainty of a distribution. Decision-tree splits reduce it.</td>
+</tr>
+<tr>
+<td><strong>Cross-entropy</strong></td>
+<td><span class="arithmatex">\(H(p, q) = -\sum_x p(x)\log q(x)\)</span></td>
+<td>Surprise when the truth is <span class="arithmatex">\(p\)</span> but you predicted <span class="arithmatex">\(q\)</span>. The classification and <abbr title="Large Language Model">LLM</abbr> training loss.</td>
+</tr>
+<tr>
+<td><strong><abbr title="Kullback–Leibler divergence">KL</abbr> divergence</strong></td>
+<td><span class="arithmatex">\(D_{KL}(p\|q) = \sum_x p(x)\log\frac{p(x)}{q(x)} = H(p,q) - H(p)\)</span></td>
+<td>Extra surprise from using <span class="arithmatex">\(q\)</span> instead of <span class="arithmatex">\(p\)</span>. Always <span class="arithmatex">\(\ge 0\)</span>, zero only when equal, <strong>not symmetric</strong>.</td>
+</tr>
+<tr>
+<td><strong>Mutual information</strong></td>
+<td><span class="arithmatex">\(I(X;Y) = H(X) - H(X \mid Y)\)</span></td>
+<td>How much knowing <span class="arithmatex">\(Y\)</span> reduces uncertainty about <span class="arithmatex">\(X\)</span>. Feature selection; contrastive learning.</td>
+</tr>
+<tr>
+<td><strong>Perplexity</strong></td>
+<td><span class="arithmatex">\(\exp(\text{cross-entropy per token})\)</span></td>
+<td>Effective number of choices a language model is unsure between. Lower is better.</td>
+</tr>
+</tbody>
+</table>
+<p>Because the true label distribution <span class="arithmatex">\(p\)</span> is fixed, minimizing cross-entropy <span class="arithmatex">\(H(p, q)\)</span> is the same as minimizing <span class="arithmatex">\(D_{KL}(p\|q)\)</span>, and the same as maximizing likelihood.</p>
+<p><strong>Forward vs reverse <abbr title="Kullback–Leibler divergence">KL</abbr>.</strong> Minimizing <span class="arithmatex">\(D_{KL}(p\|q)\)</span> (forward) forces <span class="arithmatex">\(q\)</span> to put mass wherever <span class="arithmatex">\(p\)</span> has mass, so it <strong>covers all modes</strong> and may be blurry. Minimizing <span class="arithmatex">\(D_{KL}(q\|p)\)</span> (reverse) punishes <span class="arithmatex">\(q\)</span> for putting mass where <span class="arithmatex">\(p\)</span> has none, so it <strong>seeks one mode</strong>. VAEs and variational inference use the reverse form; <abbr title="Reinforcement Learning from Human Feedback">RLHF</abbr>'s <abbr title="Kullback–Leibler divergence">KL</abbr> penalty keeps the policy close to the reference model.</p>
+<h2 id="interview-questions">Interview questions<a class="headerlink" href="#interview-questions" title="Permanent link">&para;</a></h2>
+<details class="question">
+<summary>What does a dot product measure, and why use cosine similarity for embeddings?</summary>
+<p>The dot product <span class="arithmatex">\(a \cdot b = \|a\|\|b\|\cos\theta\)</span> grows with both alignment and length. Cosine similarity divides out the lengths, so it compares only direction. For embeddings, direction carries meaning while length often reflects frequency or confidence, so cosine is more robust. If all vectors are normalized to unit length, dot product and cosine give identical rankings, which is why many vector stores normalize once and then use the faster dot product.</p>
+</details>
+<details class="question">
+<summary>Explain <abbr title="Singular Value Decomposition">SVD</abbr> and give two ML uses.</summary>
+<p>Any matrix factors as <span class="arithmatex">\(X = U\Sigma V^\top\)</span>: orthogonal input directions <span class="arithmatex">\(V\)</span>, scaling by singular values <span class="arithmatex">\(\Sigma\)</span>, orthogonal output directions <span class="arithmatex">\(U\)</span>. Truncating to the top <span class="arithmatex">\(k\)</span> singular values gives the best rank-<span class="arithmatex">\(k\)</span> approximation. Uses: <strong><abbr title="Principal Component Analysis">PCA</abbr></strong> (principal components are the right singular vectors of the centered data matrix), <strong>recommender systems</strong> (low-rank factorization of the user–item matrix), compression of weight matrices, latent semantic analysis, and the low-rank view behind <abbr title="Low-Rank Adaptation">LoRA</abbr>.</p>
+</details>
+<details class="question">
+<summary>Derive the <abbr title="Mean Squared Error">MSE</abbr> loss from maximum likelihood.</summary>
+<p>Assume targets are the model output plus Gaussian noise: <span class="arithmatex">\(y = f(x) + \epsilon\)</span>, <span class="arithmatex">\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)</span>. The log-likelihood of one point is <span class="arithmatex">\(-\frac{(y - f(x))^2}{2\sigma^2}\)</span> plus a constant. Summing over data and maximizing is equivalent to minimizing <span class="arithmatex">\(\sum (y_i - f(x_i))^2\)</span>. So <abbr title="Mean Squared Error">MSE</abbr> is the right loss when errors are roughly Gaussian; heavy-tailed errors call for <abbr title="Mean Absolute Error">MAE</abbr> or Huber loss instead.</p>
+</details>
+<details class="question">
+<summary>How is a prior related to regularization?</summary>
+<p>MAP estimation maximizes log-likelihood plus <span class="arithmatex">\(\log p(\theta)\)</span>. A zero-mean Gaussian prior gives <span class="arithmatex">\(\log p(\theta) = -\lambda\|\theta\|_2^2\)</span> + const, which is L2 regularization. A Laplace prior gives <span class="arithmatex">\(-\lambda\|\theta\|_1\)</span>, which is L1. The regularization strength <span class="arithmatex">\(\lambda\)</span> corresponds to how tight the prior is: a stronger prior belief that weights are small means more regularization.</p>
+</details>
+<details class="question">
+<summary>A disease affects 1% of people; a test is 99% sensitive and 99% specific. You test positive. What's the chance you're sick?</summary>
+<p>About 50%. Per 10,000 people: 100 are sick and 99 test positive; 9,900 are healthy and 99 of them falsely test positive. So 99 of 198 positives are real. The point interviewers want: when the base rate is low, even an accurate test yields many false positives. The same applies to fraud and rare-event detection, which is why precision matters so much there.</p>
+</details>
+<details class="question">
+<summary>What is a p-value? What are type I and type II errors?</summary>
+<p>A p-value is the probability of observing data at least as extreme as yours <em>assuming the null hypothesis is true</em>. It is not the probability that the null is true. A <strong>type I error</strong> is rejecting a true null (a false positive), controlled by the significance level α. A <strong>type II error</strong> is failing to reject a false null (a false negative); power is <span class="arithmatex">\(1 - \beta\)</span>. Lowering α reduces false positives but increases false negatives unless you collect more data.</p>
+</details>
+<details class="question">
+<summary>What does the Central Limit Theorem say, and why does it matter in ML?</summary>
+<p>The mean of many independent, identically distributed samples is approximately normally distributed, with variance <span class="arithmatex">\(\sigma^2/n\)</span>, whatever the original distribution (given finite variance). It justifies confidence intervals and z/t-tests on averages and conversion rates in A/B tests, and explains why mini-batch gradients are noisy estimates whose noise shrinks as batch size grows.</p>
+</details>
+<details class="question">
+<summary>Why is the gradient of softmax plus cross-entropy so simple?</summary>
+<p>With logits <span class="arithmatex">\(z\)</span>, probabilities <span class="arithmatex">\(p = \text{softmax}(z)\)</span> and one-hot label <span class="arithmatex">\(y\)</span>, the loss is <span class="arithmatex">\(L = -\sum_k y_k \log p_k\)</span>. Differentiating through the softmax, the terms cancel to <span class="arithmatex">\(\frac{\partial L}{\partial z} = p - y\)</span>: predicted minus true. It's well-behaved (no saturation when the model is confidently wrong), which is one reason cross-entropy trains classifiers better than <abbr title="Mean Squared Error">MSE</abbr> on probabilities. Logistic regression's gradient <span class="arithmatex">\((p - y)x\)</span> is the two-class case.</p>
+</details>
+<details class="question">
+<summary>Why don't we use Newton's method to train neural networks?</summary>
+<p>Newton's method needs the Hessian, a <span class="arithmatex">\(d \times d\)</span> matrix of second derivatives. For a model with <span class="arithmatex">\(d = 10^9\)</span> parameters that's <span class="arithmatex">\(10^{18}\)</span> entries to store, and inverting it costs <span class="arithmatex">\(O(d^3)\)</span>. It also behaves badly on non-convex losses, where it can move toward saddle points. Instead we use first-order methods with cheap curvature approximations, such as Adam's per-parameter scaling.</p>
+</details>
+<details class="question">
+<summary>Why cross-entropy instead of <abbr title="Mean Squared Error">MSE</abbr> for classification?</summary>
+<p>Three reasons. It is the maximum-likelihood loss for categorical labels, so it's statistically correct. Its gradient with softmax or sigmoid is <span class="arithmatex">\(p - y\)</span>, which stays large when the model is confidently wrong, while <abbr title="Mean Squared Error">MSE</abbr> through a sigmoid has a gradient scaled by <span class="arithmatex">\(\sigma'(z)\)</span> that vanishes in saturated regions. And combined with sigmoid it is convex in the logistic regression weights, while <abbr title="Mean Squared Error">MSE</abbr> through a sigmoid is not.</p>
+</details>
+<details class="question">
+<summary>Forward vs reverse <abbr title="Kullback–Leibler divergence">KL</abbr> divergence: which is mode-seeking?</summary>
+<p><strong>Reverse <abbr title="Kullback–Leibler divergence">KL</abbr></strong>, <span class="arithmatex">\(D_{KL}(q\|p)\)</span>, is mode-seeking: <span class="arithmatex">\(q\)</span> is heavily penalized for placing mass where <span class="arithmatex">\(p\)</span> is near zero, so it locks onto one mode. <strong>Forward <abbr title="Kullback–Leibler divergence">KL</abbr></strong>, <span class="arithmatex">\(D_{KL}(p\|q)\)</span>, is mode-covering: <span class="arithmatex">\(q\)</span> is penalized for missing any region where <span class="arithmatex">\(p\)</span> has mass, so it spreads out. Maximum likelihood training minimizes forward <abbr title="Kullback–Leibler divergence">KL</abbr> from data to model; variational inference typically minimizes reverse <abbr title="Kullback–Leibler divergence">KL</abbr>.</p>
+</details>
+<details class="question">
+<summary>What is perplexity?</summary>
+<p>The exponential of the average per-token cross-entropy: <span class="arithmatex">\(\text{PPL} = \exp\left(-\frac{1}{N}\sum_t \log p(x_t \mid x_{&lt;t})\right)\)</span>. It can be read as the number of equally likely choices the model is effectively choosing between at each step. A perplexity of 10 means the model is as uncertain as a uniform choice over 10 tokens. It's only comparable between models with the same tokenizer and test set.</p>
+</details>
+<details class="question">
+<summary>Eigenvalues of a covariance matrix: what do they tell you?</summary>
+<p>Each eigenvalue is the variance of the data along its eigenvector. Large eigenvalues mark directions where the data spreads out; tiny ones mark nearly redundant directions. Their ratio to the total shows the share of variance each principal component explains, which is how you choose how many components to keep in <abbr title="Principal Component Analysis">PCA</abbr>. A near-zero eigenvalue also signals multicollinearity, which makes linear regression unstable.</p>
+</details>
+<div class="admonition pitfall">
+<p class="admonition-title">Common mistakes</p>
+<ul>
+<li>Saying a p-value is the probability the null hypothesis is true.</li>
+<li>Confusing correlation with causation, or saying zero correlation means independence.</li>
+<li>Forgetting that <abbr title="Kullback–Leibler divergence">KL</abbr> divergence is asymmetric.</li>
+<li>Mixing up rows and columns: always state the shape of <span class="arithmatex">\(X\)</span>.</li>
+<li>Quoting sigmoid's derivative maximum as 1 (it's 0.25).</li>
+</ul>
+</div>
+<h2 id="revision-checklist">Revision checklist<a class="headerlink" href="#revision-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explain dot product vs cosine similarity and when they rank identically</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> State what rank, eigenvalues and <abbr title="Singular Value Decomposition">SVD</abbr> mean and connect them to <abbr title="Principal Component Analysis">PCA</abbr> and <abbr title="Low-Rank Adaptation">LoRA</abbr></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solve the base-rate (Bayes) puzzle</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Derive <abbr title="Mean Squared Error">MSE</abbr> and log loss from maximum likelihood; map priors to L1/L2</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define p-value, type I/II errors, power and the CLT</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Write the softmax + cross-entropy gradient</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Define entropy, cross-entropy, <abbr title="Kullback–Leibler divergence">KL</abbr> and perplexity; say which <abbr title="Kullback–Leibler divergence">KL</abbr> is mode-seeking</li>
+</ul>
+<h2 id="go-deeper">Go deeper<a class="headerlink" href="#go-deeper" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://mml-book.github.io/">Mathematics for Machine Learning</a> (free book)</li>
+<li><a href="https://www.3blue1brown.com/topics/linear-algebra">3Blue1Brown: Essence of linear algebra</a></li>
+<li><a href="https://seeing-theory.brown.edu/">Seeing Theory</a> for visual probability and statistics</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../start/interview-playbook/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Interview Playbook">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Interview Playbook
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ml-fundamentals/" class="md-footer__link md-footer__link--next" aria-label="Next: ML Fundamentals">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                ML Fundamentals
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Built for interview preparation. Corrections welcome through GitHub issues and pull requests.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/rajan-021/AI-ML" target="_blank" rel="noopener" title="Source on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.action.edit", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../assets/js/katex-init.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../../assets/js/app.js"></script>
+      
+    
+  </body>
+</html>
