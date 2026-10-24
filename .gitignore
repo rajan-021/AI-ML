@@ -1,0 +1,14 @@
+# Build output and caches
+site/
+.cache/
+__pycache__/
+*.pyc
+
+# Local environments
+.venv/
+venv/
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/

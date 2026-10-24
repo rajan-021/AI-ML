@@ -1,0 +1,198 @@
+site_name: AI/ML Interview Map
+site_description: >-
+  A structured, interview-focused path through AI and machine learning, from linear
+  regression to agents, MCP and harness engineering. Every topic answers the same
+  questions: what problem it solved, how it works, its strengths and weaknesses,
+  what replaced it, and what interviewers ask.
+site_author: rajan-021
+site_url: https://rajan-021.github.io/AI-ML/
+repo_url: https://github.com/rajan-021/AI-ML
+repo_name: rajan-021/AI-ML
+edit_uri: edit/main/docs/
+copyright: Built for interview preparation. Corrections welcome through GitHub issues and pull requests.
+
+theme:
+  name: material
+  language: en
+  custom_dir: overrides
+  favicon: assets/favicon.svg
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  icon:
+    logo: material/transit-connection-variant
+    repo: fontawesome/brands/github
+    edit: material/pencil-outline
+    admonition:
+      question: material/chat-question-outline
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - content.action.edit
+    - announce.dismiss
+
+plugins:
+  - search
+  - tags
+
+hooks:
+  - hooks/site_index.py
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      base_path: ["includes", "code"]
+      auto_append: ["abbreviations.md"]
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css
+  - assets/css/extra.css
+
+extra_javascript:
+  - assets/js/katex-init.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js
+  - assets/js/app.js
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rajan-021/AI-ML
+      name: Source on GitHub
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+not_in_nav: |
+  /tags.md
+
+nav:
+  - Start:
+      - index.md
+      - How to Use This Site: start/how-to-use.md
+      - The Big Picture: start/big-picture.md
+      - Study Plans by Week and Role: start/study-plans.md
+      - Interview Playbook: start/interview-playbook.md
+  - Foundations:
+      - Math for ML: foundations/math.md
+      - ML Fundamentals: foundations/ml-fundamentals.md
+      - Evaluation & Metrics: foundations/evaluation.md
+  - Classical ML:
+      - Linear & Logistic Regression: classical-ml/linear-models.md
+      - kNN, Naive Bayes & SVM: classical-ml/knn-nb-svm.md
+      - Trees & Ensembles: classical-ml/trees-ensembles.md
+      - Unsupervised Learning: classical-ml/unsupervised.md
+      - Recommender Systems: classical-ml/recommender-systems.md
+  - Deep Learning:
+      - Neural Network Fundamentals: deep-learning/neural-networks.md
+      - Training Deep Networks: deep-learning/training.md
+      - CNNs & Computer Vision: deep-learning/cnn-vision.md
+      - Sequence Models (RNN to Attention): deep-learning/sequence-models.md
+  - Transformers & LLMs:
+      - The Transformer: llms/transformer.md
+      - Efficient Attention & MoE: llms/efficient-attention.md
+      - Pretraining & LLMs: llms/pretraining.md
+      - Fine-Tuning & Efficiency: llms/fine-tuning.md
+      - Inference & Serving: llms/inference.md
+      - Generative Models: llms/generative-models.md
+  - Alignment & Reasoning:
+      - RL Essentials: alignment/rl-essentials.md
+      - Post-Training & Alignment: alignment/post-training.md
+      - Reasoning Models: alignment/reasoning.md
+  - AI Engineering:
+      - Prompt Engineering: ai-engineering/prompting.md
+      - Embeddings & Vector Search: ai-engineering/embeddings.md
+      - RAG: ai-engineering/rag.md
+      - Tool Calling: ai-engineering/tool-calling.md
+      - AI Agents: ai-engineering/agents.md
+      - MCP & A2A: ai-engineering/mcp.md
+      - Context Engineering: ai-engineering/context-engineering.md
+      - Harness Engineering: ai-engineering/harness-engineering.md
+      - Evaluating LLM Systems: ai-engineering/evaluation.md
+      - Guardrails & Security: ai-engineering/security.md
+  - Production:
+      - MLOps & LLMOps: production/mlops.md
+      - ML System Design: production/ml-system-design.md
+      - GenAI System Design: production/genai-system-design.md
+      - Responsible AI: production/responsible-ai.md
+  - Practice:
+      - ML Coding from Scratch: practice/ml-coding.md
+      - Most-Asked Questions: practice/top-questions.md
+      - Flashcard Drill: practice/flashcards.md
+      - My Progress: practice/progress.md
+      - Cheat Sheet: practice/cheat-sheet.md
+      - Glossary: practice/glossary.md
